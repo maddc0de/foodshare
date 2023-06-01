@@ -1,10 +1,9 @@
+const createError = require("http-errors");
 const express = require('express');
 const path = require("path"); // built-in module for working with file/directory paths
 const logger = require("morgan"); // logs incoming requests to the conosle
-
-// const foodHeroesRouter = require("./routes/foodHeroes");
-// const foodRescuersRouter = require("./routes/foodRescuers");
-// const donationsRouter = require("./routes/donations");
+const tokensRouter = require("./routes/tokens");
+const JWT = require("jsonwebtoken");
 
 const app = express();
 
@@ -14,16 +13,31 @@ app.use(express.json());
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use((req, res, next) => {
-//   res.header('Access-Control-Allow-Origin', '*');
-//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-//   next();
-// });
+// middleware function to check for valid tokens
+// const tokenChecker = (req, res, next) => {
+
+//   let token;
+//   const authHeader = req.get("Authorization")
+
+//   if(authHeader) {
+//     token = authHeader.slice(7)
+//   }
+
+//   JWT.verify(token, process.env.JWT_SECRET, (err, payload) => {
+//     if(err) {
+//       console.log(err)
+//       res.status(401).json({message: "auth error"});
+//     } else {
+//       req.user_id = payload.user_id;
+//       next();
+//     }
+//   });
+// };
 
 // route setup
-// app.use("/foodHeroes", foodHeroesRouter);
-// app.use("/foodRescuers", foodRescuersRouter);
-// app.use("/donations", donationsRouter);
+app.use("/tokens", tokensRouter);
+
+
 
 // error handler
 app.use((err, req, res) => {
