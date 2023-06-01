@@ -7,8 +7,7 @@ describe("Logging in", () => {
     // cy.visit('/');
 
     // Assert that the desired React component is present on the page
-    cy.get("#username").should("exist");
+    cy.get("#email").should("exist");
     cy.get("#password").should("exist");
   });
 });
-
