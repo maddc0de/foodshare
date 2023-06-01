@@ -9,7 +9,6 @@ const SessionsController = {
     console.log(email, password);
     
     User.findOne({ email: email }).then(async (user) => {
-      console.log(user)
       if (!user) {
         console.log("auth error: user not found")
         res.status(401).json({ message: "auth error" });
