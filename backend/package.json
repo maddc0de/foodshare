@@ -2,7 +2,7 @@
   "name": "foodshare",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "start": "nodemon ./bin/www",
     "start:test": "MONGODB_URL='mongodb://0.0.0.0/foodshare_test' npm start",
