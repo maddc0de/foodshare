@@ -3,12 +3,19 @@ const request = require("supertest");
 require("../mongodb_helper");
 const User = require('../../models/user');
 
-describe.only("/tokens", () => {
-  beforeAll( () => {
-    const user = new User({ name:"testname", email: "test@test.com", password: "12345678",  usertype: "rescuer" })
-    user.save()
-  });
 
+
+describe.only("/tokens", () => {
+  beforeAll(async () => {
+    const user = new User({
+      name: "testname",
+      email: "test@test.com",
+      password: "12345678",
+      usertype: "Rescuer"
+    });
+    await user.save();
+  });
+  
   afterAll( async () => {
     await User.deleteMany({})
   })

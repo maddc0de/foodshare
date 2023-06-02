@@ -10,12 +10,43 @@ describe("User model", () => {
     });
   });
 
+  describe('signing up as a Hero', () => {
+    it("has all the fields filled in", () => {
+      const user = new User({
+        name: 'testHeroName',
+        email: "someone@example.com",
+        password: "password",
+        usertype: "Hero",
+        location: "London",
+        description: "HI"
+      });
 
-  it("has ", () => {
-    const user = new User({
-      email: "someone@example.com",
-      password: "password",
+      expect(user.name).toEqual("testHeroName");
+      expect(user.email).toEqual("someone@example.com");
+      expect(user.password).toEqual("password");
+      expect(user.usertype).toEqual("Hero");
+      expect(user.location).toEqual("London");
+      expect(user.description).toEqual("HI");
     });
-    expect(user.email).toEqual("someone@example.com");
-  });
+
+  })
+
+  describe('signing up as a Rescuer', () => {
+    it("has all the fields filled in", () => {
+      const user = new User({
+        name: 'testRescuerName',
+        email: "someone2@example.com",
+        password: "password",
+        usertype: "Rescuer",
+      });
+
+      expect(user.name).toEqual("testRescuerName");
+      expect(user.email).toEqual("someone2@example.com");
+      expect(user.password).toEqual("password");
+      expect(user.usertype).toEqual("Rescuer");
+    });
+
+  })
+
 });
+
