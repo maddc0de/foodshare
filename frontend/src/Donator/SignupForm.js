@@ -78,8 +78,8 @@ const SignUpForm = ({ navigate }) => {
           <input id='submit' type="submit" value="Submit" />
         </form>
       );
-
     
+}
 
 
 
