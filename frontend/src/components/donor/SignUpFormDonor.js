@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 
-const DonatorSignUpForm = ({ navigate }) => {
+const SignUpFormDonor = ({ navigate }) => {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -37,9 +37,10 @@ const DonatorSignUpForm = ({ navigate }) => {
         navigate('/login')
         // setWelcomeMessage(`Welcome ${email}!`)
       } else {
-        navigate('/signup')
+        navigate('/signupdonor')
       }
-    });
+    })
+
 }
 
     const handleNameChange = (event) => {
@@ -57,10 +58,6 @@ const DonatorSignUpForm = ({ navigate }) => {
     const handleLocationChange = (event) => {
       setLocation(event.target.value)
     }
-
-    // const handleUsertypeChange = (event) => {
-    //   setUsertype(event.target.value)
-    // }
 
     const handlePasswordChange = (event) => {
       setPassword(event.target.value)
@@ -80,8 +77,4 @@ const DonatorSignUpForm = ({ navigate }) => {
     
 }
 
-
-
-
-
-export default DonatorSignUpForm;
+export default SignUpFormDonor;

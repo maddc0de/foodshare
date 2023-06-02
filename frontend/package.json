@@ -45,6 +45,7 @@
   "devDependencies": {
     "concurrently": "^8.0.1",
     "cypress": "^12.13.0",
+    "eslint-plugin-cypress": "^2.13.3",
     "nodemon": "^2.0.22"
   }
 }
