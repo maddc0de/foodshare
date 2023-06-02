@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './SignUpForm.css';
 
 const SignUpForm = ({ navigate }) => {
   const [name, setName] = useState('');
@@ -14,7 +15,6 @@ const SignUpForm = ({ navigate }) => {
     formData.append('email', email);
     formData.append('password', password);
     formData.append('usertype', usertype);
-    
 
     fetch('/users', {
       method: 'POST',
@@ -26,7 +26,7 @@ const SignUpForm = ({ navigate }) => {
         } else {
           navigate('/signup');
         }
-      })
+      });
   };
 
   const handleNameChange = (event) => {
@@ -37,40 +37,58 @@ const SignUpForm = ({ navigate }) => {
     setEmail(event.target.value);
   };
 
-  // const handleUserTypeChange = (event) => {
-  //   setUserType(event.target.value);
-  // };
+  const handleUserTypeChange = (event) => {
+    setUserType(event.target.value);
+  };
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
 
-  // const login = () => {
-  //   navigate('/login');
-  // };
-
   return (
-    <div className='signup-form'>
-      <div className='title-container'>
-        <h1 className='signup-title'>Foodshare</h1>
-      </div>
+    <div className="form">
       <form onSubmit={handleSubmit}>
-      <label htmlFor="name">Name: </label>
-          <input placeholder="Name" id="name" type='text' value={ name } onChange={handleNameChange} /> <br />
-        <br></br>
-        
-        <label htmlFor="email">Email address: </label>
-          <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} /> <br />
-        <br></br>
+        <div className="form-header">
+          <p>Please complete the details below to create your account:</p>
+        </div>
+        <div className="form-group">
+          <div className="aligned-names">
+            <div className="name-box-space">
+              <input
+                placeholder="Name"
+                id="Name"
+                type="text"
+                value={name}
+                onChange={handleNameChange}
+                required
+              />
+            </div>
+            <div className="user-type-box-space">
+              <input
+                placeholder="User type"
+                id="usertype"
+                type="text"
+                value={usertype}
+                onChange={handleUserTypeChange}
+                required
+              />
+            </div>
+          </div>
+        </div>
 
-        <label htmlFor="password">Password: </label> 
-          <input placeholder="Password" id="password" type="password" value={ password } onChange={handlePasswordChange} /> <br />
-          <br></br>
-
-        <input id='submit' type="submit" value="Submit" />
+        <div className="form-group">
+          <input id="submit" type="submit" value="Become a Food Rescuer" />
+        </div>
       </form>
+      <div className="Member-redirect">
+        <input
+          id="submit"
+          type="submit"
+          value="Already a member? Click here to login"
+        />
+      </div>
     </div>
   );
-}
+};
 
 export default SignUpForm;
