@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './SignUpForm.css';
 
 const SignUpForm = ({ navigate }) => {
   const [name, setName] = useState('');
@@ -83,7 +84,7 @@ const SignUpForm = ({ navigate }) => {
                 placeholder="Name"
                 id="Name"
                 type="text"
-                value={name} // Changed Name to name
+                value={name}
                 onChange={handleNameChange}
                 required
               />
@@ -94,7 +95,7 @@ const SignUpForm = ({ navigate }) => {
                 id="usertype"
                 type="text"
                 value={usertype}
-                onChange={handleUserTypeChange} // Changed handleuserTypeChange to handleUserTypeChange
+                onChange={handleUserTypeChange}
                 required
               />
             </div>
@@ -105,9 +106,15 @@ const SignUpForm = ({ navigate }) => {
           <input id="submit" type="submit" value="Become a Food Rescuer" />
         </div>
       </form>
+      <div className="Member-redirect">
+        <input
+          id="submit"
+          type="submit"
+          value="Already a member? Click here to login"
+        />
+      </div>
     </div>
   );
 };
 
 export default SignUpForm;
-
