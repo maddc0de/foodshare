@@ -3,12 +3,12 @@ import React, { useState } from 'react';
 
 const SignUpForm = ({ navigate }) => {
 
-  const [name, setUserName] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [description, setDescription] = useState("");
-  const [location, setUserLocation] = useState("");
-  const [username, setUserUsername] = useState("");
-  const [password, setUserPassword] = useState("");
+  const [location, setLocation] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 // const [picture, SetUserPicture] = useState("");
 
   const handleSubmit = async (event) => { 
@@ -40,7 +40,7 @@ const SignUpForm = ({ navigate }) => {
         navigate('/signup')
       }
     });
-  }
+}
 
     const handleNameChange = (event) => {
       setName(event.target.value)
