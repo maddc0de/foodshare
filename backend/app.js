@@ -3,6 +3,7 @@ const express = require('express');
 const path = require("path"); // built-in module for working with file/directory paths
 const logger = require("morgan"); // logs incoming requests to the conosle
 const tokensRouter = require("./routes/tokens");
+const usersRouter = require("./routes/users");
 const JWT = require("jsonwebtoken");
 
 const app = express();
@@ -36,7 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // route setup
 app.use("/tokens", tokensRouter);
-
+app.use("/users", usersRouter);
 
 
 // error handler
