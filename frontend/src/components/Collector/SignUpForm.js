@@ -51,32 +51,6 @@ const SignUpForm = ({ navigate }) => {
         <div className="form-header">
           <p>Please complete the details below to create your account:</p>
         </div>
-
-        <div className="form-group">
-          <div className="aligned-credentials">
-            <div className="email-box-space">
-              <input
-                placeholder="Email"
-                id="email"
-                type="text"
-                value={email}
-                onChange={handleEmailChange}
-                required
-              />
-            </div>
-            <div className="password-box-space">
-              <input
-                placeholder="Password"
-                id="password"
-                type="password"
-                value={password}
-                onChange={handlePasswordChange}
-                required
-              />
-            </div>
-          </div>
-        </div>
-
         <div className="form-group">
           <div className="aligned-names">
             <div className="name-box-space">
