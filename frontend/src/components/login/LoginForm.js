@@ -26,8 +26,7 @@ const LoginForm = ({ navigate }) => {
       let data = await response.json()
       window.localStorage.setItem("token", data.token)
       if (data.usertype === HERO) {
-        console.log(HERO)
-        // navigate('/foodhero')
+        navigate('/foodhero')
       } else {
         console.log(RESCUER)
         // navigate('/foodrescuer');
