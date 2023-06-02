@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 
 
-const SignUpForm = ({ navigate }) => {
+const DonatorSignUpForm = ({ navigate }) => {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
-  const [username, setUsername] = useState("");
+  const [usertype, setUserType] = useState("Hero");
   const [password, setPassword] = useState("");
 // const [picture, SetUserPicture] = useState("");
 
@@ -20,7 +20,7 @@ const SignUpForm = ({ navigate }) => {
       email: email,
       description: description,
       location: location,
-      username: username,
+      usertype: usertype,
       password: password,
     })
 
@@ -58,9 +58,9 @@ const SignUpForm = ({ navigate }) => {
       setLocation(event.target.value)
     }
 
-    const handleUsernameChange = (event) => {
-      setUsername(event.target.value)
-    }
+    // const handleUsertypeChange = (event) => {
+    //   setUsertype(event.target.value)
+    // }
 
     const handlePasswordChange = (event) => {
       setPassword(event.target.value)
@@ -68,12 +68,11 @@ const SignUpForm = ({ navigate }) => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <h2>{"hi"}</h2>
+            <h2>{"Welcome Food Heroes!"}</h2>
             <input placeholder="name" id="name" type='text' value={ name } onChange={handleNameChange} />
             <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
             <input placeholder="description" id="description" type='text' value={ description } onChange={handleDescriptionChange} />
             <input placeholder="location" id="location" type='text' value={ location } onChange={handleLocationChange} />
-            <input placeholder="username" id="username" type='text' value={ username } onChange={handleUsernameChange} />
             <input placeholder="password" id="password" type='text' value={ password } onChange={handlePasswordChange} />
           <input id='submit' type="submit" value="Submit" />
         </form>
@@ -85,4 +84,4 @@ const SignUpForm = ({ navigate }) => {
 
 
 
-export default SignUpForm;
+export default DonatorSignUpForm;
