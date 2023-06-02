@@ -14,7 +14,6 @@ const SignUpForm = ({ navigate }) => {
     formData.append('email', email);
     formData.append('password', password);
     formData.append('usertype', usertype);
-    
 
     fetch('/users', {
       method: 'POST',
@@ -26,7 +25,7 @@ const SignUpForm = ({ navigate }) => {
         } else {
           navigate('/signup');
         }
-      })
+      });
   };
 
   const handleNameChange = (event) => {
@@ -37,40 +36,78 @@ const SignUpForm = ({ navigate }) => {
     setEmail(event.target.value);
   };
 
-  // const handleUserTypeChange = (event) => {
-  //   setUserType(event.target.value);
-  // };
+  const handleUserTypeChange = (event) => {
+    setUserType(event.target.value);
+  };
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
 
-  // const login = () => {
-  //   navigate('/login');
-  // };
-
   return (
-    <div className='signup-form'>
-      <div className='title-container'>
-        <h1 className='signup-title'>Foodshare</h1>
-      </div>
+    <div className="form">
       <form onSubmit={handleSubmit}>
-      <label htmlFor="name">Name: </label>
-          <input placeholder="Name" id="name" type='text' value={ name } onChange={handleNameChange} /> <br />
-        <br></br>
-        
-        <label htmlFor="email">Email address: </label>
-          <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} /> <br />
-        <br></br>
+        <div className="form-header">
+          <p>Please complete the details below to create your account:</p>
+        </div>
 
-        <label htmlFor="password">Password: </label> <br />
-          <input placeholder="Password" id="password" type="password" value={ password } onChange={handlePasswordChange} />
-          <br></br>
+        <div className="form-group">
+          <div className="aligned-credentials">
+            <div className="email-box-space">
+              <input
+                placeholder="Email"
+                id="email"
+                type="text"
+                value={email}
+                onChange={handleEmailChange}
+                required
+              />
+            </div>
+            <div className="password-box-space">
+              <input
+                placeholder="Password"
+                id="password"
+                type="password"
+                value={password}
+                onChange={handlePasswordChange}
+                required
+              />
+            </div>
+          </div>
+        </div>
 
-        <input id='submit' type="submit" value="Submit" />
+        <div className="form-group">
+          <div className="aligned-names">
+            <div className="name-box-space">
+              <input
+                placeholder="Name"
+                id="Name"
+                type="text"
+                value={name} // Changed Name to name
+                onChange={handleNameChange}
+                required
+              />
+            </div>
+            <div className="user-type-box-space">
+              <input
+                placeholder="User type"
+                id="usertype"
+                type="text"
+                value={usertype}
+                onChange={handleUserTypeChange} // Changed handleuserTypeChange to handleUserTypeChange
+                required
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="form-group">
+          <input id="submit" type="submit" value="Become a Food Rescuer" />
+        </div>
       </form>
     </div>
   );
-}
+};
 
 export default SignUpForm;
+
