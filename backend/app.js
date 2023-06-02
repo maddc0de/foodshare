@@ -3,6 +3,7 @@ const express = require('express');
 const path = require("path"); // built-in module for working with file/directory paths
 const logger = require("morgan"); // logs incoming requests to the conosle
 const tokensRouter = require("./routes/tokens");
+const usersRouter = require("./routes/users");
 const JWT = require("jsonwebtoken");
 
 const app = express();
@@ -14,29 +15,29 @@ app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // middleware function to check for valid tokens
-// const tokenChecker = (req, res, next) => {
+const tokenChecker = (req, res, next) => {
 
-//   let token;
-//   const authHeader = req.get("Authorization")
+  let token;
+  const authHeader = req.get("Authorization")
 
-//   if(authHeader) {
-//     token = authHeader.slice(7)
-//   }
+  if(authHeader) {
+    token = authHeader.slice(7)
+  }
 
-//   JWT.verify(token, process.env.JWT_SECRET, (err, payload) => {
-//     if(err) {
-//       console.log(err)
-//       res.status(401).json({message: "auth error"});
-//     } else {
-//       req.user_id = payload.user_id;
-//       next();
-//     }
-//   });
-// };
+  JWT.verify(token, process.env.JWT_SECRET, (err, payload) => {
+    if(err) {
+      console.log(err)
+      res.status(401).json({message: "auth error"});
+    } else {
+      req.user_id = payload.user_id;
+      next();
+    }
+  });
+};
 
 // route setup
 app.use("/tokens", tokensRouter);
-
+app.use("/users", usersRouter);
 
 
 // error handler
