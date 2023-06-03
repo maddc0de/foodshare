@@ -4,6 +4,7 @@ import { useNavigate as navigate } from "react-router-dom";
 const LoginForm = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [failMessage, setFailMessage] = useState("");
   const [owner, setOwner] = useState(`Login ${props.owner}`);
   const [ownerColor, setOwnerColor] = useState(
     props.owner === "Food Hero"
@@ -36,7 +37,14 @@ const LoginForm = (props) => {
       .then((data) => {
         if ("message" in data && data.message !== "OK") {
           console.log("wow sorry");
-          props.navigate("/login");
+          props.owner === "Food Hero"
+            ? props.navigate("/login/donator")
+            : props.navigate("/login/collector");
+          setEmail("");
+          setPassword("");
+          setFailMessage(
+            `Sorry ${props.owner}, we have failed to login, please check the password and email used in the process.`
+          );
         } else {
           console.log("yay");
           window.localStorage.setItem("token", data.token);
@@ -60,6 +68,9 @@ const LoginForm = (props) => {
   return (
     <div className="login-form">
       <div className="container mt-5">
+        <div className="text-center" style={{ color: "#dc3545" }}>
+          {failMessage}
+        </div>
         <div className="row mt-5">
           <div className="col"></div>
           <div className="col">
@@ -74,6 +85,7 @@ const LoginForm = (props) => {
                     value={email}
                     onChange={handleEmailChange}
                     className="form-control"
+                    required
                   />
                 </div>
                 <div className="form-group col-md-12 mt-1">
@@ -85,6 +97,7 @@ const LoginForm = (props) => {
                     type="password"
                     value={password}
                     onChange={handlePasswordChange}
+                    required
                   />
                 </div>
                 <div className="form-group col-md-12 mt-3">
