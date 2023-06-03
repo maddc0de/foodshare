@@ -12,7 +12,7 @@ const App = () => {
       <Route path="/login" element={<LoginForm navigate={useNavigate()} />} />
       <Route path="/signupcollector" element={<SignUpForm navigate={useNavigate()} />} />
       <Route path="/signupdonator" element={<DonatorSignUpForm navigate={useNavigate()} />} />
-      <Route path="/foodhero" element={<DonatorFeed navigate={useNavigate()} />} />
+      <Route path="/foodhero/:id" element={<DonatorFeed navigate={useNavigate()} />} />
     </Routes>
   );
 };
