@@ -9,8 +9,8 @@ const App = () => {
   return (
     <Routes>
       <Route path="/login" element={<LoginForm navigate={useNavigate()} />} />
-      <Route path="/signupcollector" element={<SignUpForm navigate={useNavigate()} />} />
-      <Route path="/signupdonator" element={<DonatorSignUpForm navigate={useNavigate()} />} />
+      <Route path="/signup/collector" element={<SignUpForm navigate={useNavigate()} />} />
+      <Route path="/signup/donator" element={<DonatorSignUpForm navigate={useNavigate()} />} />
     </Routes>
   );
 };
