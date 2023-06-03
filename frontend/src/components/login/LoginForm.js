@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './LoginForm.css';
 
 const LoginForm = ({ navigate }) => {
 
@@ -43,13 +44,33 @@ const LoginForm = ({ navigate }) => {
     setPassword(event.target.value)
   }
     return (
-      <div className='login-form'>
-        <form  onSubmit={handleSubmit}>
-          <input placeholder='Email' id="email" type='text' value={email} onChange={handleEmailChange} />
-          <input placeholder='Password' id="password" type='password' value={password} onChange={handlePasswordChange} />
-          <input role='submit-button' id='submit' type="submit" value="Submit"/>
-        </form>
-      </div>
+      <div className="login-form">
+      <form onSubmit={handleSubmit}>
+        <div className="input-container">
+          <input
+            id="email"
+            type="text"
+            value={email}
+            onChange={handleEmailChange}
+          />
+          <label htmlFor="email" className={email ? 'input-label active' : 'input-label'}>
+            Email
+          </label>
+        </div>
+        <div className="input-container">
+          <input
+            id="password"
+            type="password"
+            value={password}
+            onChange={handlePasswordChange}
+          />
+          <label htmlFor="password" className={password ? 'input-label active' : 'input-label'}>
+            Password
+          </label>
+        </div>
+        <input role="submit-button" id="submit" type="submit" value="Submit" />
+      </form>
+    </div>
     )
   }
 

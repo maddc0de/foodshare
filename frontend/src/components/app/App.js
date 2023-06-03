@@ -2,7 +2,7 @@ import './App.css';
 import LoginForm from "../login/LoginForm";
 import SignUpForm from "../Collector/SignUpForm";
 import DonatorSignUpForm from '../Donator/SignUpForm';
-import DonatorFeed from '../donatorfeed/DonatorFeed';
+import DonatorFeed from '../donatorFeed/DonatorFeed';
 import React from "react";
 import { useNavigate, Routes, Route } from "react-router-dom";
 
