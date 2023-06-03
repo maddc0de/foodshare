@@ -1,20 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Navbar = (props, { navigate }) => {
   const [owner, setOwner] = useState("");
-
+  const [checked, setChecked] = useState("");
   const changeOwner = () => {
-    let owner;
+    let newOwner;
     if(props.owner === 'Food Rescuer'){
-      owner = 'donator';
+      newOwner = 'donator';
     }else{
-      owner = 'collector';
+      newOwner = 'collector';
+      
     }
     let path = window.location.href.split('#')[0].split('/')
     path.pop()
-    path.push(owner)
+    path.push(newOwner)
     window.location.href = path.join('/')
   };
+
+  useEffect(() => {
+    if(props.owner !== 'Food Rescuer'){
+      setChecked("checked")
+    }
+  }, []);
 
   return (
     <>
@@ -60,7 +67,8 @@ const Navbar = (props, { navigate }) => {
                 type="checkbox"
                 role="switch"
                 id="flexSwitchCheckDefault"
-                onClick={changeOwner}
+                onChange={changeOwner}
+                checked = {checked}
               />
               <label
                 className="form-check-label"
