@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 
 const LoginForm = ({ navigate }) => {
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const HERO = 'Hero'; // all caps means its a constant - value that doesnt change
+  const HERO = 'Hero';
   const RESCUER = 'Rescuer';
 
   const handleSubmit = async (event) => {
@@ -26,8 +27,7 @@ const LoginForm = ({ navigate }) => {
       let data = await response.json()
       window.localStorage.setItem("token", data.token)
       if (data.usertype === HERO) {
-        console.log(HERO)
-        // navigate('/foodhero')
+        navigate(`/foodhero/${data.id}`)
       } else {
         console.log(RESCUER)
         // navigate('/foodrescuer');
