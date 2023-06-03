@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useNavigate as navigate } from "react-router-dom";
 
 const LoginForm = (props) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("tesco@email.com");
+  const [password, setPassword] = useState("password");
   const [failMessage, setFailMessage] = useState("");
   const [owner, setOwner] = useState(`Login ${props.owner}`);
   const [ownerColor, setOwnerColor] = useState(
