@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "css.gg": "^2.0.0",
+    "react-native-video": "^5.2.1"
+  }
+}
