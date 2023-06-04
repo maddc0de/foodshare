@@ -1,18 +1,6 @@
 import React, { useState } from 'react';
 import './About.css';
 import thumbnailImage from './foodwaste.png'
-import Maddy from './maddy.png'
-import Arya from './arya.png'
-import Robin from './robin.png'
-import Solmaz from './solmaz.png'
-import Jamie from './jamie.png'
-import Manuela from './manuela.png'
-import Cars from './cars.png'
-import Bin from './bin.png'
-import Factory from './factory.png'
-import Description from './description.png'
-import Pictures from './Pictures.png'
-import aboutUs from './aboutUs .png'
 import { Link } from 'react-router-dom';
 import Page from './page.jpg'
 
