@@ -24,7 +24,7 @@ const SignUpFormDonor = ({ navigate }) => {
       password: password,
     })
 
-    fetch( '/donators', {
+    fetch( '/donor', {
       method: 'post',
       headers: {
         'Content-Type': 'application/json',
@@ -32,23 +32,12 @@ const SignUpFormDonor = ({ navigate }) => {
       body: requestBody,
     })
 
-    //   .then(response => {  
-    //     // come back later, and re-make the route
-    //     if(response.status === 201) {
-    //     navigate('/login')
-    //     // setWelcomeMessage(`Welcome ${email}!`)
-    //   } else {
-    //     navigate('/signupdonor')
-    //   }
-    // })
-
     .then(response => {  
       // come back later, and re-make the route
       if(response.status === 201) {
-      history.push('/login');
+        <navigate to='/login' />
       // setWelcomeMessage(`Welcome ${email}!`)
     } else {
-      // return <Redirect to='/signupdonor' />;
       <navigate to='/signupdonor' />
     }
 
@@ -83,7 +72,7 @@ const SignUpFormDonor = ({ navigate }) => {
             <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
             <input placeholder="description" id="description" type='text' value={ description } onChange={handleDescriptionChange} />
             <input placeholder="location" id="location" type='text' value={ location } onChange={handleLocationChange} />
-            <input placeholder="password" id="password" type='text' value={ password } onChange={handlePasswordChange} />
+            <input placeholder="password" id="password" type='password' value={ password } onChange={handlePasswordChange} />
           <input id='submit' type="submit" value="Submit" />
         </form>
       );
