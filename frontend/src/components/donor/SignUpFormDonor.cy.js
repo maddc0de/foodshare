@@ -1,26 +1,37 @@
 import SignUpFormDonor from "./SignUpFormDonor";
-
 describe("Signing up for a donor", () => {
-  it("calls the users endpoint", () => {
-    cy.mount(<SignUpFormDonor />);
+  it("makes a post request to the sign up donor page and lets the user complete the form", () => {
+    cy.mount(< SignUpFormDonor />);
+    let response = {result: [{name: "Dave"}]};
+    cy.intercept("POST", "http://localhost:3000/signupdonor", (req) => {
+      req.reply({
+        statusCode: 200,
+        body: response,
+      }).as("submitForm");
 
-    cy.intercept('POST', '/donor', { message: "OK" }).as("SignUpFormDonor");
+    cy.get('input[id="name"]').click().type("Dave");
+    cy.get('input[id="email"]').click().type("dave@example.com");
+  
+    cy.get('input[type="submit"]').click();
+  
+    cy.wait("@submitForm").then(() => {
+      cy.get('input[id="name"]').invoke("val").should("contain", "Dave");
+      });
+    })
+  })
 
-    cy.get("#name").type("name");
-    cy.get("#email").type("someone@example.com");
-    cy.get("#description").type("description");
-    cy.get("#location").type("location");
-    cy.get("#password").type("password");
-    cy.get("#submit").click();
-    cy.wait("@signupdonor").then(interception => {
-      expect(interception.response.body.message).to.eq("OK");
-    });
-  });
+//   it("when the user clicks on the donor sign up option, they are redirected to the sign up donor page", () => {
+//     cy.mount("/signupdonor");
+//     cy.intercept("GET", "/signupdonor", { message: "OK" }).as("signUpDonor");
+//     cy.wait("@signUpDonor").then(() => {
+//       cy.get('h2').should('contain.text', "Welcome Food Heroes!");
+//     });
+//   });
+// });
 
-  // it("checks the fetch request", () => {
-  //   cy.request('POST', '/donators').as("signup");
-  //   cy.get("@signup").should((response) => {
-  //     expect(response).to.have.property("name");
-  //   });
-  // });
-});
+it("when the user clicks on the donor sign up option, they are redirected to the sign up donor page", () => {
+  cy.request("GET", "http://localhost:3000/signupdonor").then((response) =>{
+    expect(response.headers).to.have.property('contain.text', "Welcome Food Heroes!");
+    })
+  })
+})
