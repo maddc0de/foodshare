@@ -5,6 +5,9 @@
   "food_heroes_id": "6463a460cf310f44ab767412",
   "description": "Fruits and vegetables",
   "status": "available",
+  "code": "1234",
+  "expire": "18:30",
+  "food_hero_location": "120 Old Broad St, London EC2N 1AR",
   "__v": 0
 },{
   "_id": {
@@ -13,5 +16,8 @@
   "food_heroes_id": "6463a4d6cf310f44ab76741d",
   "description": "Bagels and juices",
   "status": "available",
+  "code": "2345",
+  "expire": "19:35",
+  "food_hero_location": "68 Goswell Rd., London EC1M 7AD",
   "__v": 0
 }]

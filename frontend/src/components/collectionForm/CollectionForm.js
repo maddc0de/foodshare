@@ -1,18 +1,11 @@
 import React, { useState } from "react";
-import "./DonatorForm.css";
 
-const DonationForm = ({ onCreated, foodheroid }) => {
-  const produceCode = () => {
-    const min = 1000;
-    const max = 9999
-    return Math.floor(Math.random() * (max - min + 1) + min).toString()
-  }
-
-  const [content, setContent] = useState("");
+const CollectionForm = ({ onCreated, foodRescuerId, donationId, donationInfo, useDistance, foodHero }) => {
+  const [content, setContent] = useState(donationInfo);
   const [token, setToken] = useState(window.localStorage.getItem("token"));
-  const [expire, setExpire] = useState("");
-  const [location, setLocation] = useState(window.localStorage.getItem("location"));
-  const [code, setCode] = useState(produceCode());
+  const [donator, setdonator] = useState(foodHero);
+  const [name, setName] = useState(window.localStorage.getItem("name"));
+  const [distance, setDistance] = useState(useDistance)
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -24,12 +17,10 @@ const DonationForm = ({ onCreated, foodheroid }) => {
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        food_heroes_id: foodheroid,
-        description: content,
-        token: token,
-        expire: expire,
-        food_hero_location: location,
-        code: code
+        food_rescuer_id: foodRescuerId,
+        donation_id: donationId,
+        name: name,
+        token: token
       }),
     });
 
@@ -40,23 +31,38 @@ const DonationForm = ({ onCreated, foodheroid }) => {
     setContent(event.target.value);
   };
 
-  const handleExpireChange = (event) => {
-    setExpire(event.target.value);
-  };
+
 
   return (
     <>
-      <h3 className="text-center">Make a Donation</h3>
+      <h3 className="text-center">Book Your Collection</h3>
       <form onSubmit={handleSubmit}>
         <div className="form-row">
           <div className="form-group">
+          <label
+              htmlFor="donator"
+              style={{
+                display: "block",
+                marginBottom: "-0.5rem",
+              }}
+            >
+              Food Hero:
+            </label>
+            <input
+              type="text"
+              className="form-control col-md-12 mt-2"
+              value={donator}
+              id="donator"
+     
+               disabled
+            />
             <label htmlFor="inputDescription">Description</label>
             <textarea
               className="form-control"
               id="inputDescription"
               placeholder="Type food contents here.."
               value={content}
-              required
+              disabled
               onChange={handleContentChange}
             ></textarea>
           </div>
@@ -70,26 +76,25 @@ const DonationForm = ({ onCreated, foodheroid }) => {
                 marginBottom: "-0.5rem",
               }}
             >
-              Expires at:
+              Distance:
             </label>
             <input
-              type="time"
+              type="text"
               className="form-control col-md-12 mt-2"
+              value={distance}
               id="expire"
               style={{
                 width: "48.5%",
                 marginRight: "1.5%",
                 display: "inline-block",
               }}
-              required
-              value={expire}
-              onChange={handleExpireChange}
+               disabled
             />
 
             <input
               type="submit"
               className="form-control btn btn-success col-md-12"
-              value="Submit Your Donation"
+              value="Confirm"
               style={{
                 width: "48.5%",
                 marginLeft: "1.5%",
@@ -105,4 +110,4 @@ const DonationForm = ({ onCreated, foodheroid }) => {
   );
 };
 
-export default DonationForm;
+export default CollectionForm;

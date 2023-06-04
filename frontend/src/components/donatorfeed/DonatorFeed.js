@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import DonationForm from "../donationForm/DonationForm";
 import Navbar from "../navbar/Navbar";
@@ -10,6 +10,7 @@ const DonatorFeed = ({ navigate }) => {
   const [showDonationForm, setShowDonationForm] = useState(false);
   const [foodHeroId, setFoodHeroId] = useState(id);
   const [owner, setOwner] = useState("Food Hero");
+  const [donationsList, setDonationsList] = useState([]);
 
   const handleAddDonationClick = () => {
     setShowDonationForm(true);
@@ -26,7 +27,7 @@ const DonatorFeed = ({ navigate }) => {
   const statusDropdown = (format, name, disabled) => {
     const options = ["Available", "Pending", "Completed", "Unclaimed"].map(
       (val) => (
-        <li>
+        <li key={val}>
           <a className="dropdown-item" href="#">
             {val}
           </a>
@@ -54,6 +55,20 @@ const DonatorFeed = ({ navigate }) => {
   const mockDonations = [
     {
       status: "Available",
+      code: "0214",
+      donationInfo: "4 yummy apple pies with sweet onion!",
+      colectorInfo: "Jery's foodbank",
+      expires: "03:17",
+    },
+    {
+      status: "Available",
+      code: "0215",
+      donationInfo: "4 yummy apple pies with sweet onion!",
+      colectorInfo: "Jery's foodbank",
+      expires: "03:17",
+    },
+    {
+      status: "Completed",
       code: "0218",
       donationInfo: "4 yummy apple pies with sweet onion!",
       colectorInfo: "Jery's foodbank",
@@ -61,7 +76,14 @@ const DonatorFeed = ({ navigate }) => {
     },
     {
       status: "Available",
-      code: "0218",
+      code: "0214",
+      donationInfo: "4 yummy apple pies with sweet onion!",
+      colectorInfo: "Jery's foodbank",
+      expires: "03:17",
+    },
+    {
+      status: "Available",
+      code: "0215",
       donationInfo: "4 yummy apple pies with sweet onion!",
       colectorInfo: "Jery's foodbank",
       expires: "03:17",
@@ -75,10 +97,14 @@ const DonatorFeed = ({ navigate }) => {
     },
   ];
 
+  useEffect(() => {
+    setDonationsList(mockDonations);
+  }, []);
+
   const myDonations = () => {
-    return mockDonations.map((donation) => {
+    return donationsList.map((donation) => {
       return (
-        <div className="container mb-2 border border-success border-1 rounded px-2 py-2">
+        <div key={donation.code} className="container mb-2 border border-success border-1 rounded px-2 py-2">
           <div className="row">
             <div className="dropdown col">{statusDropdown('btn-outline-success border-0 px-0', donation.status, false)}</div>
             <div className="col col-md-9 text-end"><button disabled className="btn btn-outline-success border-0" >Code: {donation.code}</button></div>
@@ -121,12 +147,12 @@ const DonatorFeed = ({ navigate }) => {
                   </div>
                 </div>
               ) : (
-                <>
+                <div className="sticky-top">
                   <div id="feed" className="row">
                     <div className="col col-md-12 mb-3">
                       <button
                         onClick={handleAddDonationClick}
-                        className="btn btn-warning  col col-md-12"
+                        className="btn btn-success  col col-md-12"
                       >
                         Add Your Donation
                       </button>
@@ -153,15 +179,24 @@ const DonatorFeed = ({ navigate }) => {
                       </button>
                     </div>
                   </div>
-                </>
+                </div>
               )}
             </div>
             <div className="col col-md-3"></div>
           </div>
           <div className="row mt-5">
-            <div id="donations-list" className="col col-md-6 mx-auto">
-              {myDonations()}
-            </div>
+          {(() => {
+              if (showDonationForm) {
+                return;
+              } else {
+                return (
+                  <div id="donations-list" className="col col-md-6 mx-auto">
+                    <h3>My Donations</h3>
+                    {myDonations()}
+                  </div>
+                );
+              }
+            })()}
           </div>
           <div className="row">
             <div className="col"></div>
@@ -170,7 +205,7 @@ const DonatorFeed = ({ navigate }) => {
       </>
     );
   } else {
-    navigate("/signupdonator");
+    navigate("/signup/donator");
   }
 };
 

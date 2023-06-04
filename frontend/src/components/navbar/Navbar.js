@@ -49,7 +49,7 @@ const Navbar = (props) => {
   return (
     <>
       <nav
-        className="navbar navbar-expand-lg navbar-light bg-light"
+        className="navbar navbar-expand-lg navbar-light bg-light fixed-top"
         style={{ boxShadow: "0 0.125rem 0.125rem 0 rgba(0, 0, 0, .3" }}
       >
         <button

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate as navigate } from "react-router-dom";
 
 const LoginForm = (props) => {
-  const [email, setEmail] = useState("tesco@email.com");
+  const [email, setEmail] = useState("hackney@email.com");//tesco@email.com
   const [password, setPassword] = useState("password");
   const [failMessage, setFailMessage] = useState("");
   const [owner, setOwner] = useState(`Login ${props.owner}`);
@@ -48,15 +48,21 @@ const LoginForm = (props) => {
         } else {
           console.log("yay");
           window.localStorage.setItem("token", data.token);
+          window.localStorage.setItem("location", data.location);
+          window.localStorage.setItem("id", data.id);
+          window.localStorage.setItem("name", data.name);
           if (data.usertype === HERO) {
             props.navigate(`/foodhero/${data.id}`);
           } else {
-            console.log(RESCUER);
-            // navigate('/foodrescuer');
+            props.navigate(`/foodrescuer/${data.id}`);
           }
         }
       });
   };
+
+  const handleOwnerChange = (event) => {
+    setOwner(event.target.value);
+  }
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -107,6 +113,7 @@ const LoginForm = (props) => {
                     type="submit"
                     className={ownerColor}
                     value={owner}
+                    onChange={handleOwnerChange}
                   />
                 </div>
                 <div className="form-group col-md-12 mt-3">
