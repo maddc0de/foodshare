@@ -5,6 +5,9 @@ const DonationForm = ({ onCreated, foodheroid, token }) => {
   const [description, setDescription] = useState("");
   const [expiryDate, setExpiryDate] = useState("");
 
+  const currentDate = new Date();
+  const formattedCurrentDate = currentDate.toISOString().split("T")[0];
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     
@@ -34,7 +37,7 @@ const DonationForm = ({ onCreated, foodheroid, token }) => {
         <h1 className="make-post-title">Make a Donation</h1>
         <textarea className="desc-input" rows="4" cols="50" placeholder="type food contents here" id="description" value={ description } onChange={handleDescriptionChange}/>
         <label>Expiry Date:</label>
-        <input type="date" id="expiryDate" name="expiryDate" pattern="\d{4}-\d{2}-\d{2}" value={expiryDate} onChange={handleExpiryDateChange} required />
+        <input type="date" id="expiryDate" name="expiryDate" pattern="\d{4}-\d{2}-\d{2}" min={formattedCurrentDate} value={expiryDate} onChange={handleExpiryDateChange} required />
         <input className="submit-button" role='submit-button' id='submit' type="submit" value="Submit"/>
       </form>
     </>
