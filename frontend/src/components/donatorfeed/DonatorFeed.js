@@ -9,6 +9,7 @@ const DonatorFeed = ({ navigate }) => {
   const [showDonationForm, setShowDonationForm] = useState(false);
   const [foodHeroId, setFoodHeroId] = useState(id);
   const [donationsByDonator, setdonationsByDonator] = useState([]);
+  const [needsRefresh, setRefresh] = useState(false);
 
   useEffect(() => {
     if(token) {
@@ -25,7 +26,7 @@ const DonatorFeed = ({ navigate }) => {
           setdonationsByDonator(data.donations);
         })
     }
-  }, [])
+  }, [needsRefresh])
     
 
   const handleAddDonationClick = () => {
@@ -34,6 +35,7 @@ const DonatorFeed = ({ navigate }) => {
 
   const handleDonationCreated = () => {
     setShowDonationForm(false);
+    setRefresh(!needsRefresh);
   };
   
   if(token) {

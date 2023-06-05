@@ -22,7 +22,7 @@ const DonationForm = ({ onCreated, foodheroid, token }) => {
     onCreated();
   }
 
-  const handleContentChange = (event) => {
+  const handleDescriptionChange = (event) => {
     setDescription(event.target.value)
   }
 
@@ -30,7 +30,7 @@ const DonationForm = ({ onCreated, foodheroid, token }) => {
     <>
       <form className="add-donation-form" onSubmit={handleSubmit}>
         <h1 className="make-post-title">Make a Donation</h1>
-        <textarea className="desc-input" rows="4" cols="50" placeholder="type food contents here" id="description" onChange={handleContentChange}/>
+        <textarea className="desc-input" rows="4" cols="50" placeholder="type food contents here" id="description" onChange={handleDescriptionChange}/>
         <input className="submit-button" role='submit-button' id='submit' type="submit" value="Submit"/>
       </form>
     </>
