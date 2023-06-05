@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import './DonatorForm.css'
 
-const DonationForm = ({ onCreated, foodheroid }) => {
-  const [content, setContent] = useState("");
-  const [token, setToken] = useState(window.localStorage.getItem("token"));
+const DonationForm = ({ onCreated, foodheroid, token }) => {
+  const [description, setDescription] = useState("");
+ 
+  console.log(`donation form's token: ${token}`)
+  console.log(token);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -14,21 +16,21 @@ const DonationForm = ({ onCreated, foodheroid }) => {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       },
-      body: JSON.stringify({ food_heroes_id: foodheroid, description: content, token: token })
+      body: JSON.stringify({ food_heroes_id: foodheroid, description: description, token: token })
     })
 
     onCreated();
   }
 
-  const handleContentChange = (event) => {
-    setContent(event.target.value)
+  const handleDescriptionChange = (event) => {
+    setDescription(event.target.value)
   }
 
   return (
     <>
       <form className="add-donation-form" onSubmit={handleSubmit}>
         <h1 className="make-post-title">Make a Donation</h1>
-        <textarea className="desc-input" rows="4" cols="50" placeholder="type food contents here" id="description" onChange={handleContentChange} form="donationForm"/>
+        <textarea className="desc-input" rows="4" cols="50" placeholder="type food contents here" id="description" onChange={handleDescriptionChange}/>
         <input className="submit-button" role='submit-button' id='submit' type="submit" value="Submit"/>
       </form>
     </>
@@ -36,3 +38,4 @@ const DonationForm = ({ onCreated, foodheroid }) => {
 }
 
 export default DonationForm;
+
