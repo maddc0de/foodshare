@@ -9,10 +9,22 @@ const DonatorSignUpForm = ({ navigate }) => {
   const [usertype, setUserType] = useState("Hero");
   const [password, setPassword] = useState("");
   const [owner, setOwner] = useState("Food Hero");
+  const [errors, setErrors] = useState([]);
   // const [picture, SetUserPicture] = useState("");
-
+  window.localStorage.setItem("app-route", "signup")
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    const formData = new FormData();
+    formData.append('email', email);
+    formData.append('name', name);
+    formData.append('description', description);
+    formData.append('location', location);
+    formData.append('password', password);
+    formData.append('usertype', "Hero");
+
+
 
     const requestBody = JSON.stringify({
       name: name,
@@ -22,23 +34,34 @@ const DonatorSignUpForm = ({ navigate }) => {
       usertype: usertype,
       password: password,
     });
+    
 
-    fetch("/donators", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: requestBody,
-    }).then((response) => {
-      // come back later, and re-make the route
+  fetch('/users', {
+    method: 'POST',
+    body: formData,
+     // headers: {
+      //   "Content-Type": "application/json",
+      // },
+      // body: requestBody,
+  })
+    .then((response) => {
+       // come back later, and re-make the route
       if (response.status === 201) {
-        navigate("/login");
+        navigate('/login/donator');
         // setWelcomeMessage(`Welcome ${email}!`)
       } else {
-        navigate("/signup");
+        if (response.status === 400) {
+          response.json().then((data) => {
+            setErrors(data.message);
+          });
+        }
+        navigate('/signup/donator');
       }
+    })
+    .catch((error) => {
+      console.log(error);
     });
-  };
+};
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -60,13 +83,10 @@ const DonatorSignUpForm = ({ navigate }) => {
   //   setUsertype(event.target.value)
   // }
 
-  const navigateToLogin = () => {
-    navigate("/login/donator");
-  }
-
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
+
 
   return (
     <>
@@ -76,7 +96,7 @@ const DonatorSignUpForm = ({ navigate }) => {
         <div className="row mt-5">
           <div className="col"></div>
           <div className="col">
-            <form>
+            <form form onSubmit={handleSubmit}>
               <div className="form-row">
                 <div className="form-group col-md-12 mt-1">
                   <label htmlFor="inputName3">Name</label>
@@ -85,6 +105,8 @@ const DonatorSignUpForm = ({ navigate }) => {
                     className="form-control"
                     id="inputName3"
                     placeholder="Name"
+                    value={ name }
+                    onChange={handleNameChange} 
                   />
                 </div>
                 <div className="form-group col-md-12 mt-1">
@@ -94,6 +116,8 @@ const DonatorSignUpForm = ({ navigate }) => {
                     className="form-control"
                     id="inputEmail4"
                     placeholder="Email"
+                    value={ email }
+                    onChange={handleEmailChange} 
                   />
                 </div>
                 <div className="form-group col-md-12 mt-1">
@@ -103,6 +127,8 @@ const DonatorSignUpForm = ({ navigate }) => {
                     className="form-control"
                     id="inputPassword4"
                     placeholder="Password"
+                    value={ password }
+                    onChange={handlePasswordChange} 
                   />
                 </div>
 
@@ -113,29 +139,9 @@ const DonatorSignUpForm = ({ navigate }) => {
                     className="form-control"
                     id="inputAddress"
                     placeholder="1234 Main St"
+                    value={ location }
+                    onChange={handleLocationChange} 
                   />
-                  <div className="mt-1">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="City"
-                      style={{
-                        width: "47.5%",
-                        marginRight: "2.5%",
-                        display: "inline-block",
-                      }}
-                    />
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Post Code"
-                      style={{
-                        width: "47.5%",
-                        marginLeft: "2.5%",
-                        display: "inline-block",
-                      }}
-                    />
-                  </div>
                 </div>
 
                 <div className="form-group">
@@ -145,12 +151,16 @@ const DonatorSignUpForm = ({ navigate }) => {
                     className="form-control"
                     id="inputDescription"
                     placeholder="We are a small Coffee Shop.."
+                    value= { description }
+                    onChange={handleDescriptionChange} 
                   ></textarea>
                 </div>
 
                 <div className="form-group col-md-12 mt-3">
                   <input
-                    type="button"
+                  role="submit-button"
+                  id="submit"
+                    type="submit"
                     className="form-control btn btn-primary"
                     value="Become a Food Hero"
                   />
@@ -167,7 +177,6 @@ const DonatorSignUpForm = ({ navigate }) => {
                     className="form-control btn btn-secondary"
                     id="inputButton"
                     value="Login"
-                    onClick={navigateToLogin}
                   />
                 </div>
               </div>
