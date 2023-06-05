@@ -12,7 +12,7 @@ describe("Signing up for a donor", () => {
     cy.get("#location").type("location");
     cy.get("#password").type("password");
     cy.get("#submit").click();
-    cy.wait("@signupdonor").then(interception => {
+    cy.wait('@SignUpFormDonor').then(interception => {
       expect(interception.response.body.message).to.eq("OK");
     });
   });

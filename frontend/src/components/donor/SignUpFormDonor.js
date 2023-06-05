@@ -31,29 +31,17 @@ const SignUpFormDonor = ({ navigate }) => {
       },
       body: requestBody,
     })
+      .then(response => {  
+        // come back later, and re-make the route
+        if(response.status === 201) {
+        navigate('/login')
+        // setWelcomeMessage(`Welcome ${email}!`)
+      } else {
+        navigate('/signupdonor')
+      }
+    })
 
-    //   .then(response => {  
-    //     // come back later, and re-make the route
-    //     if(response.status === 201) {
-    //     navigate('/login')
-    //     // setWelcomeMessage(`Welcome ${email}!`)
-    //   } else {
-    //     navigate('/signupdonor')
-    //   }
-    // })
-
-    .then(response => {  
-      // come back later, and re-make the route
-      if(response.status === 201) {
-      history.push('/login');
-      // setWelcomeMessage(`Welcome ${email}!`)
-    } else {
-      // return <Redirect to='/signupdonor' />;
-      <navigate to='/signupdonor' />
-    }
-
-  })
-  }
+}
 
     const handleNameChange = (event) => {
       setName(event.target.value)
@@ -75,7 +63,6 @@ const SignUpFormDonor = ({ navigate }) => {
       setPassword(event.target.value)
     }
 
-
     return (
         <form onSubmit={handleSubmit}>
             <h2>{"Welcome Food Heroes!"}</h2>
@@ -88,8 +75,6 @@ const SignUpFormDonor = ({ navigate }) => {
         </form>
       );
     
-    }
-    
-
+}
 
 export default SignUpFormDonor;
