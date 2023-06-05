@@ -27,6 +27,19 @@ const DonationsController = {
     }
   },
 
+  GetAllDonations: async (req, res) => {
+  try {
+    // const { foodRescuer } = req.params;
+    const donations = await Donation.find().exec();
+      // .sort({ dateCreated: -1 })
+      // .exec();
+    const token = await TokenGenerator.jsonwebtoken(req.user_id);
+    res.status(200).json({ donations });
+  } catch (err) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+},
+
 };
 
 module.exports = DonationsController;
