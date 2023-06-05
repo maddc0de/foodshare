@@ -1,11 +1,10 @@
 import React, { useState, useEffect, render } from "react";
 
-const Navbar = (props) => {
-  const [owner, setOwner] = useState("");
+const Navbar = ({ owner, navigate }) => {
   const [checked, setChecked] = useState("");
   const changeOwner = () => {
     let newOwner;
-    if (props.owner === "Food Rescuer") {
+    if (owner === "Food Rescuer") {
       newOwner = "donator";
     } else {
       newOwner = "collector";
@@ -17,11 +16,11 @@ const Navbar = (props) => {
   };
 
   const logout = () => {
-    props.navigate('/login/donator')
+    navigate('/login/donator')
   }
 
   useEffect(() => {
-    if (props.owner !== "Food Rescuer") {
+    if (owner !== "Food Rescuer") {
       setChecked("checked");
     }
   }, []);
@@ -39,7 +38,7 @@ const Navbar = (props) => {
             checked={checked}
           />
           <label className="form-check-label" htmlFor="flexSwitchCheckDefault">
-            {props.owner}
+            {owner}
           </label>
         </div>
       </div>
@@ -83,7 +82,7 @@ const Navbar = (props) => {
             </li>
           </ul>
           {(function () {
-            if (props.owner !== "") {
+            if (owner !== "") {
               return (
                 <div className="navbar-nav ms-auto me-5">
                   <div className="form-check form-switch">
@@ -99,7 +98,7 @@ const Navbar = (props) => {
                       className="form-check-label"
                       htmlFor="flexSwitchCheckDefault"
                     >
-                      {props.owner}
+                      {owner}
                     </label>
                   </div>
                 </div>
