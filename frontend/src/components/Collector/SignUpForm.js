@@ -31,6 +31,10 @@ const SignUpForm = ({ navigate }) => {
     });
   };
 
+  const navigateToLogin = () => {
+    navigate("/login/collector");
+  }
+
   const handleNameChange = (event) => {
     setName(event.target.value);
   };
@@ -98,6 +102,7 @@ const SignUpForm = ({ navigate }) => {
                     className="form-control btn btn-secondary"
                     id="inputButton"
                     value="Login"
+                    onClick={navigateToLogin}
                   />
                 </div>
               </div>
