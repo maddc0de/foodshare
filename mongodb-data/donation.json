@@ -7,6 +7,7 @@
   },
   "description": "cans of Tuna",
   "status": "available",
+  "code": "1234",
   "__v": 0
 },{
   "_id": {
@@ -17,6 +18,7 @@
   },
   "description": "Fruits and vegetables",
   "status": "available",
+  "code": "5678"
   "__v": 0
 },{
   "_id": {
@@ -27,5 +29,6 @@
   },
   "description": "Bagels and juices",
   "status": "available",
+  "code": "1111",
   "__v": 0
 }]
