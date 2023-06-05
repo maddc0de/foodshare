@@ -60,6 +60,10 @@ const DonatorSignUpForm = ({ navigate }) => {
   //   setUsertype(event.target.value)
   // }
 
+  const navigateToLogin = () => {
+    navigate("/login/donator");
+  }
+
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
@@ -163,6 +167,7 @@ const DonatorSignUpForm = ({ navigate }) => {
                     className="form-control btn btn-secondary"
                     id="inputButton"
                     value="Login"
+                    onClick={navigateToLogin}
                   />
                 </div>
               </div>
