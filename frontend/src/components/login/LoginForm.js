@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import './LoginForm.css';
 
 const LoginForm = ({ navigate }) => {
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const HERO = 'Hero'; // all caps means its a constant - value that doesnt change
+  const HERO = 'Hero';
   const RESCUER = 'Rescuer';
 
   const handleSubmit = async (event) => {
@@ -26,8 +28,7 @@ const LoginForm = ({ navigate }) => {
       let data = await response.json()
       window.localStorage.setItem("token", data.token)
       if (data.usertype === HERO) {
-        console.log(HERO)
-        // navigate('/foodhero')
+        navigate(`/foodhero/${data.id}`)
       } else {
         console.log(RESCUER)
         // navigate('/foodrescuer');
@@ -43,13 +44,33 @@ const LoginForm = ({ navigate }) => {
     setPassword(event.target.value)
   }
     return (
-      <div className='login-form'>
-        <form  onSubmit={handleSubmit}>
-          <input placeholder='Email' id="email" type='text' value={email} onChange={handleEmailChange} />
-          <input placeholder='Password' id="password" type='password' value={password} onChange={handlePasswordChange} />
-          <input role='submit-button' id='submit' type="submit" value="Submit"/>
-        </form>
-      </div>
+      <div className="login-form">
+      <form onSubmit={handleSubmit}>
+        <div className="input-container">
+          <input
+            id="email"
+            type="text"
+            value={email}
+            onChange={handleEmailChange}
+          />
+          <label htmlFor="email" className={email ? 'input-label active' : 'input-label'}>
+            Email
+          </label>
+        </div>
+        <div className="input-container">
+          <input
+            id="password"
+            type="password"
+            value={password}
+            onChange={handlePasswordChange}
+          />
+          <label htmlFor="password" className={password ? 'input-label active' : 'input-label'}>
+            Password
+          </label>
+        </div>
+        <input role="submit-button" id="submit" type="submit" value="Submit" />
+      </form>
+    </div>
     )
   }
 

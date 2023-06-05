@@ -20,28 +20,6 @@ describe("Signing up for a donor", () => {
     })
   })
 
-<<<<<<< HEAD
-    cy.get("#name").type("name");
-    cy.get("#email").type("someone@example.com");
-    cy.get("#description").type("description");
-    cy.get("#location").type("location");
-    cy.get("#password").type("password");
-    cy.get("#submit").click();
-    cy.wait('@SignUpFormDonor').then(interception => {
-      expect(interception.response.body.message).to.eq("OK");
-    });
-  });
-=======
-//   it("when the user clicks on the donor sign up option, they are redirected to the sign up donor page", () => {
-//     cy.mount("/signupdonor");
-//     cy.intercept("GET", "/signupdonor", { message: "OK" }).as("signUpDonor");
-//     cy.wait("@signUpDonor").then(() => {
-//       cy.get('h2').should('contain.text', "Welcome Food Heroes!");
-//     });
-//   });
-// });
->>>>>>> 822e318962ef8ae8210c48fe4eae3367833318fe
-
 it("when the user clicks on the donor sign up option, they are redirected to the sign up donor page", () => {
   cy.request("GET", "http://localhost:3000/signupdonor").then((response) =>{
     expect(response.headers).to.have.property('contain.text', "Welcome Food Heroes!");
