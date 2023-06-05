@@ -1,56 +1,141 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { useNavigate as navigate } from "react-router-dom";
+import './LoginForm.css';
 
-const LoginForm = ({ navigate }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const LoginForm = (props) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [failMessage, setFailMessage] = useState("");
+  const [owner, setOwner] = useState(`Login ${props.owner}`);
+  const [ownerColor, setOwnerColor] = useState(
+    props.owner === "Food Hero"
+      ? "form-control btn btn-primary"
+      : "form-control btn btn-success"
+  );
 
-  const HERO = 'Hero'; // all caps means its a constant - value that doesnt change
-  const RESCUER = 'Rescuer';
+  const HERO = "Hero";
+  const RESCUER = "Rescuer";
 
-  const handleSubmit = async (event) => {
+  const navigateToSignup = () => {
+    if (props.owner === "Food Hero") {
+      props.navigate("/signup/donator");
+    } else {
+      props.navigate("/signup/collector");
+    }
+  };
+
+  const handleSubmit = (event) => {
     event.preventDefault();
 
-    let response = await fetch('/tokens', {
-      method: 'post',
+    fetch("/tokens", {
+      method: "post",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email: email, password: password })
+      body: JSON.stringify({ email: email, password: password }),
     })
-
-    if (response.status !== 201) {
-      console.log("oops")
-      navigate('/login')
-    } else {
-      console.log("yay")
-      let data = await response.json()
-      window.localStorage.setItem("token", data.token)
-      if (data.usertype === HERO) {
-        console.log(HERO)
-        // navigate('/foodhero')
-      } else {
-        console.log(RESCUER)
-        // navigate('/foodrescuer');
-      }
-    }
-  }
+      .then((response) => response.json())
+      .then((data) => {
+        if ("message" in data && data.message !== "OK") {
+          console.log("wow sorry");
+          props.owner === "Food Hero"
+            ? props.navigate("/login/donator")
+            : props.navigate("/login/collector");
+          setEmail("");
+          setPassword("");
+          setFailMessage(
+            `Sorry ${props.owner}, we have failed to login, please check the password and email used in the process.`
+          );
+        } else {
+          console.log("yay");
+          window.localStorage.setItem("token", data.token);
+          if (data.usertype === HERO) {
+            props.navigate(`/foodhero/${data.id}`);
+          } else {
+            console.log(RESCUER);
+            // navigate('/foodrescuer');
+          }
+        }
+      });
+  };
 
   const handleEmailChange = (event) => {
-    setEmail(event.target.value)
-  }
+    setEmail(event.target.value);
+  };
 
   const handlePasswordChange = (event) => {
-    setPassword(event.target.value)
-  }
-    return (
-      <div className='login-form'>
-        <form  onSubmit={handleSubmit}>
-          <input placeholder='Email' id="email" type='text' value={email} onChange={handleEmailChange} />
-          <input placeholder='Password' id="password" type='password' value={password} onChange={handlePasswordChange} />
-          <input role='submit-button' id='submit' type="submit" value="Submit"/>
-        </form>
+    setPassword(event.target.value);
+  };
+  return (
+    <div className="login-form">
+      <div className="container mt-5">
+        <div className="text-center" style={{ color: "#dc3545" }}>
+          {failMessage}
+        </div>
+        <div className="row mt-5">
+          <div className="col"></div>
+          <div className="col">
+            <form onSubmit={handleSubmit}>
+              <div className="form-row">
+                <div className="form-group col-md-12 mt-1">
+                  <label htmlFor="email">Email</label>
+                  <input
+                    placeholder="Email"
+                    id="email"
+                    type="text"
+                    value={email}
+                    onChange={handleEmailChange}
+                    className="form-control"
+                    required
+                  />
+                </div>
+                <div className="form-group col-md-12 mt-1">
+                  <label htmlFor="password">Password</label>
+                  <input
+                    className="form-control"
+                    placeholder="Password"
+                    id="password"
+                    type="password"
+                    value={password}
+                    onChange={handlePasswordChange}
+                    required
+                  />
+                </div>
+                <div className="form-group col-md-12 mt-3">
+                  <input
+                    role="submit-button"
+                    id="submit"
+                    type="submit"
+                    className={ownerColor}
+                    value={owner}
+                  />
+                </div>
+                <div className="form-group col-md-12 mt-3">
+                  <label
+                    htmlFor="inputButton"
+                    className="col-md-12 text-center"
+                  >
+                    Not a member? Click here to register
+                  </label>
+                  <input
+                    type="button"
+                    className="form-control btn btn-secondary"
+                    id="inputButton"
+                    value="Signup"
+                    onClick={navigateToSignup}
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
+          <div className="col"></div>
+        </div>
+        <div className="row">
+          <div className="col"></div>
+        </div>
       </div>
-    )
-  }
+    </div>
+  );
+};
 
-  export default LoginForm;
+export default LoginForm;
