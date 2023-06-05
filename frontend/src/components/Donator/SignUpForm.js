@@ -6,7 +6,7 @@ const DonatorSignUpForm = ({ navigate }) => {
   const [email, setEmail] = useState("");
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
-  const [usertype, setUserType] = useState("");
+  const [usertype, setUserType] = useState("Hero");
   const [password, setPassword] = useState("");
   const [owner, setOwner] = useState("Food Hero");
   const [errors, setErrors] = useState([]);
@@ -127,7 +127,7 @@ const DonatorSignUpForm = ({ navigate }) => {
                 <label htmlFor="inputDescription">Description</label>
                 <input placeholder="Description" id="description" type='text' value={ description } onChange={handleDescriptionChange} />
                 </div>
-                <input placeholder="User Type" id="usertype" type='text' value='Hero' onChange={handleUsertypeChange} />
+              
 
                 <div className="form-group col-md-12 mt-3">
                 <input id='submit' type="submit" value="Submit" />
