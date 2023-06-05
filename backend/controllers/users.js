@@ -1,11 +1,11 @@
 const User = require("../models/user");
-const { validatePassword, validateEmail } = require("../helpers/validation");
+// const { validatePassword, validateEmail } = require("../helpers/validation");
 
 
-const multer = require("multer");
+// const multer = require("multer");
 
-// Create multer upload instance
-const upload = multer({ storage: storage });
+// // Create multer upload instance
+// const upload = multer({ storage: storage });
 
 const UsersController = {
   Create: async (req, res) => {  //defines a method called "Create" that is an asynchronous function and takes two parameters: "req" and "res", which represent the request and response objects.

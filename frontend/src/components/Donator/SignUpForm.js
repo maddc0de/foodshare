@@ -16,13 +16,13 @@ const DonatorSignUpForm = ({ navigate }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const formData = new FormData();
-    formData.append('email', email);
-    formData.append('name', name);
-    formData.append('description', description);
-    formData.append('location', location);
-    formData.append('password', password);
-    formData.append('usertype', "Hero ");
+    // const formData = new FormData();
+    // formData.append('email', email);
+    // formData.append('name', name);
+    // formData.append('description', description);
+    // formData.append('location', location);
+    // formData.append('password', password);
+    // formData.append('usertype', "Hero ");
 
 
 
@@ -38,11 +38,11 @@ const DonatorSignUpForm = ({ navigate }) => {
 
   fetch('/users', {
     method: 'POST',
-    body: formData,
-     // headers: {
-      //   "Content-Type": "application/json",
-      // },
-      // body: requestBody,
+    // body: formData,
+     headers: {
+        "Content-Type": "application/json",
+      },
+      body: requestBody,
   })
     .then((response) => {
        // come back later, and re-make the route
