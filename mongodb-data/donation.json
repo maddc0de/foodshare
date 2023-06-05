@@ -6,7 +6,9 @@
     "$oid": "6463a460cf310f44ab767412"
   },
   "description": "cans of Tuna",
+  "expiryDate": "2023-06-13T00:00:00.000Z",
   "status": "available",
+  "code": "1234",
   "__v": 0
 },{
   "_id": {
@@ -16,7 +18,9 @@
     "$oid": "6463a460cf310f44ab767412"
   },
   "description": "Fruits and vegetables",
+  "expiryDate": "2023-06-08T00:00:00.000Z",
   "status": "available",
+  "code": "5678",
   "__v": 0
 },{
   "_id": {
@@ -26,6 +30,8 @@
     "$oid": "6463a4d6cf310f44ab76741d"
   },
   "description": "Bagels and juices",
+  "expiryDate": "2023-06-08T00:00:00.000Z",
   "status": "available",
+  "code": "1111",
   "__v": 0
 }]
