@@ -3,7 +3,7 @@ import LoginCollector from "../Collector/LoginCollector";
 import LoginDonator from "../Donator/LoginDonator";
 import SignUpForm from "../Collector/SignUpForm";
 import DonatorSignUpForm from '../Donator/SignUpForm';
-import DonatorFeed from '../donatorfeed/DonatorFeed';
+import DonatorFeed from '../donatorFeed/DonatorFeed';
 import React from "react";
 import { useNavigate, Routes, Route } from "react-router-dom";
 
