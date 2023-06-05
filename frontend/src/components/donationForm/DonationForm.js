@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './DonatorForm.css'
 
 const DonationForm = ({ onCreated, foodheroid, token }) => {
-  const [content, setContent] = useState("");
+  const [description, setDescription] = useState("");
  
   console.log(`donation form's token: ${token}`)
   console.log(token);
@@ -16,14 +16,14 @@ const DonationForm = ({ onCreated, foodheroid, token }) => {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       },
-      body: JSON.stringify({ food_heroes_id: foodheroid, description: content, token: token })
+      body: JSON.stringify({ food_heroes_id: foodheroid, description: description, token: token })
     })
 
     onCreated();
   }
 
   const handleContentChange = (event) => {
-    setContent(event.target.value)
+    setDescription(event.target.value)
   }
 
   return (
