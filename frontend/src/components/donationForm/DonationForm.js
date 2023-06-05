@@ -6,6 +6,7 @@ const DonationForm = ({ onCreated, foodheroid, token }) => {
   const [expiryDate, setExpiryDate] = useState("");
 
   const currentDate = new Date();
+  currentDate.setDate(currentDate.getDate() + 1); // Add one day to the current date
   const formattedCurrentDate = currentDate.toISOString().split("T")[0];
 
   const handleSubmit = async (event) => {
