@@ -1,4 +1,4 @@
-import SignUpForm from "./SignupForm";
+import DonatorSignUpForm from "./SignupForm";
 
 describe("Signup up", () => {
   it("calls the users endpoint", () => {
