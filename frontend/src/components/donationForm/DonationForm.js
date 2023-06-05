@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import './DonatorForm.css'
 
-const DonationForm = ({ onCreated, foodheroid }) => {
+const DonationForm = ({ onCreated, foodheroid, token }) => {
   const [content, setContent] = useState("");
-  const [token, setToken] = useState(window.localStorage.getItem("token"));
+ 
+  console.log(`donation form's token: ${token}`)
+  console.log(token);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -28,7 +30,7 @@ const DonationForm = ({ onCreated, foodheroid }) => {
     <>
       <form className="add-donation-form" onSubmit={handleSubmit}>
         <h1 className="make-post-title">Make a Donation</h1>
-        <textarea className="desc-input" rows="4" cols="50" placeholder="type food contents here" id="description" onChange={handleContentChange} form="donationForm"/>
+        <textarea className="desc-input" rows="4" cols="50" placeholder="type food contents here" id="description" onChange={handleContentChange}/>
         <input className="submit-button" role='submit-button' id='submit' type="submit" value="Submit"/>
       </form>
     </>
@@ -36,3 +38,4 @@ const DonationForm = ({ onCreated, foodheroid }) => {
 }
 
 export default DonationForm;
+
