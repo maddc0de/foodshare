@@ -20,7 +20,8 @@ const UsersController = {
     const user = new User(req.body); // creates a new instance of the user model and with the request body as data
     user.save((err) => {             // saves the user
       if (err) {
-        return res.status(400).json({ message: 'Bad request' });  // if there was an error whilst saving, it will return a 400 status with the message 'Bad request'
+        console.log(err)
+        return res.status(400).json({ message: 'Bad ' });  // if there was an error whilst saving, it will return a 400 status with the message 'Bad request'
       } else {
         return res.status(201).json({ message: 'OK' }); // else if the save is successfull, it will return a 201 status and an 'OK' message
       }
