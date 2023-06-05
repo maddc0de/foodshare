@@ -22,7 +22,7 @@ const DonatorSignUpForm = ({ navigate }) => {
     formData.append('description', description);
     formData.append('location', location);
     formData.append('password', password);
-    formData.append('usertype', "Hero");
+    formData.append('usertype', "Hero ");
 
 
 

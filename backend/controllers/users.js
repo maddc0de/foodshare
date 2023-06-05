@@ -1,5 +1,5 @@
 const User = require("../models/user");
-const { validateName, validatePassword, validateUsername } = require("../helpers/validation");
+const { validatePassword, validateEmail } = require("../helpers/validation");
 
 
 const multer = require("multer");
