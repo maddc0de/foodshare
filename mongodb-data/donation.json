@@ -1,8 +1,20 @@
 [{
   "_id": {
+    "$oid": "5354a460cf310f44ab767112"
+  },
+  "food_heroes_id": {
+    "$oid": "6463a460cf310f44ab767412"
+  },
+  "description": "cans of Tuna",
+  "status": "available",
+  "__v": 0
+},{
+  "_id": {
     "$oid": "6463a460cf310f44ab767112"
   },
-  "food_heroes_id": "6463a460cf310f44ab767412",
+  "food_heroes_id": {
+    "$oid": "6463a460cf310f44ab767412"
+  },
   "description": "Fruits and vegetables",
   "status": "available",
   "code": "1234",
@@ -13,7 +25,9 @@
   "_id": {
     "$oid": "6463a4d6cf310f44ab66741d"
   },
-  "food_heroes_id": "6463a4d6cf310f44ab76741d",
+  "food_heroes_id": {
+    "$oid": "6463a4d6cf310f44ab76741d"
+  },
   "description": "Bagels and juices",
   "status": "available",
   "code": "2345",
