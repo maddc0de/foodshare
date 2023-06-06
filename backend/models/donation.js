@@ -5,7 +5,6 @@ const DonationSchema = new mongoose.Schema({
   description: { type: String, required: true },
   expiryDate: { type: Date, required: true },
   status: { type: String, default: "available" },
-  food_hero_location: { type: String, required: true },
   code: { type: String, default: generateCode, unique: true },
   
 });
