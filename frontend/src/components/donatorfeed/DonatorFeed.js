@@ -11,6 +11,7 @@ const DonatorFeed = ({ navigate }) => {
   const [foodHeroId, setFoodHeroId] = useState(id);
   const [owner, setOwner] = useState("Food Hero");
   const [donationsByDonator, setdonationsByDonator] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const [needsRefresh, setRefresh] = useState(false);
 
   function formatDate(dateString) {
@@ -81,24 +82,37 @@ const DonatorFeed = ({ navigate }) => {
   }; 
   
   const myDonations = () => {
-    return donationsByDonator.map((donation) => {
-      return (
-        <div key={donation.code} className="container mb-2 border border-success border-1 rounded px-2 py-2">
-          <div className="row">
-            <div className="dropdown col">{statusDropdown('btn-outline-success border-0 px-0', donation.status, false)}</div>
-            <div className="col col-md-9 text-end"><button disabled className="btn btn-outline-success border-0" >Code: {donation.code}</button></div>
+    const filteredDonations = searchQuery
+      ? donationsByDonator.filter((donation) =>
+          donation.description.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+      : donationsByDonator;
+  
+    return filteredDonations.map((donation) => (
+      <div
+        key={donation.code}
+        className="container mb-2 border border-success border-1 rounded px-2 py-2"
+      >
+        <div className="row">
+          <div className="dropdown col">
+            {statusDropdown('btn-outline-success border-0 px-0', donation.status, false)}
           </div>
-          <div className="row ps-5 pe-1">
-            <div className="col">{donation.description}</div>
-          </div>
-          <hr className="mb-1"></hr>
-          <div className="row">
-            <div className="col">Food Rescuer: {donation.collectorInfo}</div>
-            <div className="col text-end">Expires: {formatDate(donation.expiryDate)}</div>
+          <div className="col col-md-9 text-end">
+            <button disabled className="btn btn-outline-success border-0">
+              Code: {donation.code}
+            </button>
           </div>
         </div>
-      );
-    });
+        <div className="row ps-5 pe-1">
+          <div className="col">{donation.description}</div>
+        </div>
+        <hr className="mb-1"></hr>
+        <div className="row">
+          <div className="col">Food Rescuer: {donation.collectorInfo}</div>
+          <div className="col text-end">Expires: {formatDate(donation.expiryDate)}</div>
+        </div>
+      </div>
+    ));
   };
 
   if (token) {
@@ -148,15 +162,9 @@ const DonatorFeed = ({ navigate }) => {
                         type="search"
                         placeholder="Search"
                         aria-label="Search"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
                       />
-                    </div>
-                    <div className="col col-md-3">
-                      <button
-                        className="btn btn-outline-success col col-md-12"
-                        type="submit"
-                      >
-                        Search
-                      </button>
                     </div>
                   </div>
                 </div>
@@ -190,12 +198,3 @@ const DonatorFeed = ({ navigate }) => {
 };
 
 export default DonatorFeed;
-
-
-// {
-//   status: "Available",
-//   code: "0214",
-//   description: "4 yummy apple pies with sweet onion!",
-//   collectorInfo: "Jery's foodbank",
-//   expires: "03:17",
-// },
