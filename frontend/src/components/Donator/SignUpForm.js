@@ -70,6 +70,10 @@ const DonatorSignUpForm = ({ navigate }) => {
     });
 };
 
+const navigateToLogin = () => {
+  navigate("/login/donator");
+};
+
   const handleNameChange = (event) => {
     setName(event.target.value);
   };
@@ -144,6 +148,7 @@ const DonatorSignUpForm = ({ navigate }) => {
                     className="form-control btn btn-secondary"
                     id="inputButton"
                     value="Login"
+                    onClick={ navigateToLogin }
                   />
                 </div>
               </div>

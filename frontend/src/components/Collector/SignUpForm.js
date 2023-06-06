@@ -99,6 +99,7 @@ const SignUpForm = ({ navigate }) => {
                     className="form-control btn btn-secondary"
                     id="inputButton"
                     value="Login"
+                    onClick={navigateToLogin}
                   />
                 </div>
               </div>
