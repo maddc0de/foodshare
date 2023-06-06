@@ -11,9 +11,16 @@ const DonatorFeed = ({ navigate }) => {
   const [foodHeroId, setFoodHeroId] = useState(id);
   const [owner, setOwner] = useState("Food Hero");
   const [donationsByDonator, setdonationsByDonator] = useState([]);
-  const [donationsList, setDonationsList] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const [needsRefresh, setRefresh] = useState(false);
-  
+
+  function formatDate(dateString) {
+    const expDate = new Date(dateString);
+    const year = expDate.getFullYear();
+    const month = String(expDate.getMonth() + 1).padStart(2, '0');
+    const day = String(expDate.getDate()).padStart(2, '0');
+    return `${day}-${month}-${year}`;
+  }
 
   useEffect(() => {
     if(token) {
@@ -72,89 +79,40 @@ const DonatorFeed = ({ navigate }) => {
         <ul className="dropdown-menu">{options}</ul>
      </>
     );
-  };
-
-  const mockDonations = [
-    {
-      status: "Available",
-      code: "0214",
-      donationInfo: "4 yummy apple pies with sweet onion!",
-      colectorInfo: "Jery's foodbank",
-      expires: "03:17",
-    },
-    {
-      status: "Available",
-      code: "0215",
-      donationInfo: "4 yummy apple pies with sweet onion!",
-      colectorInfo: "Jery's foodbank",
-      expires: "03:17",
-    },
-    {
-      status: "Completed",
-      code: "0218",
-      donationInfo: "4 yummy apple pies with sweet onion!",
-      colectorInfo: "Jery's foodbank",
-      expires: "03:17",
-    },
-    {
-      status: "Available",
-      code: "0214",
-      donationInfo: "4 yummy apple pies with sweet onion!",
-      colectorInfo: "Jery's foodbank",
-      expires: "03:17",
-    },
-    {
-      status: "Available",
-      code: "0215",
-      donationInfo: "4 yummy apple pies with sweet onion!",
-      colectorInfo: "Jery's foodbank",
-      expires: "03:17",
-    },
-    {
-      status: "Completed",
-      code: "0218",
-      donationInfo: "4 yummy apple pies with sweet onion!",
-      colectorInfo: "Jery's foodbank",
-      expires: "03:17",
-    },
-  ];
-
-  useEffect(() => {
-    setDonationsList(mockDonations);
-  }, []);
-
+  }; 
+  
   const myDonations = () => {
-    return donationsList.map((donation) => {
-      return (
-        <div key={donation.code} className="container mb-2 border border-success border-1 rounded px-2 py-2">
-          <div className="row">
-            <div className="dropdown col">{statusDropdown('btn-outline-success border-0 px-0', donation.status, false)}</div>
-            <div className="col col-md-9 text-end"><button disabled className="btn btn-outline-success border-0" >Code: {donation.code}</button></div>
+    const filteredDonations = searchQuery
+      ? donationsByDonator.filter((donation) =>
+          donation.description.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+      : donationsByDonator;
+  
+    return filteredDonations.map((donation) => (
+      <div
+        key={donation.code}
+        className="container mb-2 border border-success border-1 rounded px-2 py-2"
+      >
+        <div className="row">
+          <div className="dropdown col">
+            {statusDropdown('btn-outline-success border-0 px-0', donation.status, false)}
           </div>
-          <div className="row ps-5 pe-1">
-            <div className="col">{donation.donationInfo}</div>
-        {/* <h1>Hello, Hero!</h1>
-        
-        {showDonationForm && token ?
-          <div>
-            <DonationForm onCreated={handleDonationCreated} foodheroid={foodHeroId} token={token}/>
-          </div> :
-          <div id="feed">
-            <button onClick={handleAddDonationClick}>Add Donation</button>
-            <div id="donations-list" >
-              <h2>Donations</h2>
-              {donationsByDonator.map((donation) => (
-                <div key={donation._id}>{donation.description}</div>))}
-            </div> */}
-          </div>
-          <hr className="mb-1"></hr>
-          <div className="row">
-            <div className="col">Food Rescuer: {donation.colectorInfo}</div>
-            <div className="col text-end">Expires: {donation.expires}</div>
+          <div className="col col-md-9 text-end">
+            <button disabled className="btn btn-outline-success border-0">
+              Code: {donation.code}
+            </button>
           </div>
         </div>
-      );
-    });
+        <div className="row ps-5 pe-1">
+          <div className="col">{donation.description}</div>
+        </div>
+        <hr className="mb-1"></hr>
+        <div className="row">
+          <div className="col">Food Rescuer: {donation.collectorInfo}</div>
+          <div className="col text-end">Expires: {formatDate(donation.expiryDate)}</div>
+        </div>
+      </div>
+    ));
   };
 
   if (token) {
@@ -172,6 +130,7 @@ const DonatorFeed = ({ navigate }) => {
                   <DonationForm
                     onCreated={handleDonationCreated}
                     foodheroid={foodHeroId}
+                    token={token}
                   />
                   <div className="col mt-2">
                     <input
@@ -203,15 +162,9 @@ const DonatorFeed = ({ navigate }) => {
                         type="search"
                         placeholder="Search"
                         aria-label="Search"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
                       />
-                    </div>
-                    <div className="col col-md-3">
-                      <button
-                        className="btn btn-outline-success col col-md-12"
-                        type="submit"
-                      >
-                        Search
-                      </button>
                     </div>
                   </div>
                 </div>
