@@ -61,7 +61,7 @@ const DonatorSignUpForm = ({ navigate }) => {
   // }
 
   const navigateToLogin = () => {
-    navigate("/login/donator");
+    <navigate to='/login/donator' />
   }
 
   const handlePasswordChange = (event) => {
@@ -128,7 +128,7 @@ const DonatorSignUpForm = ({ navigate }) => {
                     <input
                       type="text"
                       className="form-control"
-                      placeholder="Post Code"
+                      placeholder="Postcode"
                       style={{
                         width: "47.5%",
                         marginLeft: "2.5%",
