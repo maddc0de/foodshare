@@ -20,7 +20,8 @@
   "description": "Fruits and vegetables",
   "expiryDate": "2023-06-08T00:00:00.000Z",
   "status": "available",
-  "code": "5678",
+  "code": "1234",
+  "food_hero_location": "120 Old Broad St, London EC2N 1AR",
   "__v": 0
 },{
   "_id": {
@@ -32,6 +33,7 @@
   "description": "Bagels and juices",
   "expiryDate": "2023-06-08T00:00:00.000Z",
   "status": "available",
-  "code": "1111",
+  "code": "2345",
+  "food_hero_location": "68 Goswell Rd., London EC1M 7AD",
   "__v": 0
 }]

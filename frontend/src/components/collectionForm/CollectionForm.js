@@ -1,15 +1,11 @@
 import React, { useState } from "react";
-import "./DonatorForm.css";
 
-
-const DonationForm = ({ onCreated, foodheroid, token }) => {
-  const [description, setDescription] = useState("");
-  const [expiryDate, setExpiryDate] = useState("");
-  const [location, setLocation] = useState(window.localStorage.getItem("location"));
-  
-  const currentDate = new Date();
-  currentDate.setDate(currentDate.getDate() + 1); // Add one day to the current date
-  const formattedCurrentDate = currentDate.toISOString().split("T")[0];
+const CollectionForm = ({ onCreated, foodRescuerId, donationId, donationInfo, useDistance, foodHero }) => {
+  const [content, setContent] = useState(donationInfo);
+  const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [donator, setdonator] = useState(foodHero);
+  const [name, setName] = useState(window.localStorage.getItem("name"));
+  const [distance, setDistance] = useState(useDistance)
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -20,34 +16,54 @@ const DonationForm = ({ onCreated, foodheroid, token }) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ food_heroes_id: foodheroid, description: description, expiryDate: expiryDate, token: token })
-    })
+      body: JSON.stringify({
+        food_rescuer_id: foodRescuerId,
+        donation_id: donationId,
+        name: name,
+        token: token
+      }),
+    });
 
     onCreated();
   };
 
-  const handleDescriptionChange = (event) => {
-    setDescription(event.target.value)
-  }
+  const handleContentChange = (event) => {
+    setContent(event.target.value);
+  };
 
-  const handleExpiryDateChange = (event) => {
-    setExpiryDate(event.target.value)
-  }
+
 
   return (
     <>
-      <h3 className="text-center">Make a Donation</h3>
+      <h3 className="text-center">Book Your Collection</h3>
       <form onSubmit={handleSubmit}>
         <div className="form-row">
           <div className="form-group">
+          <label
+              htmlFor="donator"
+              style={{
+                display: "block",
+                marginBottom: "-0.5rem",
+              }}
+            >
+              Food Hero:
+            </label>
+            <input
+              type="text"
+              className="form-control col-md-12 mt-2"
+              value={donator}
+              id="donator"
+     
+               disabled
+            />
             <label htmlFor="inputDescription">Description</label>
             <textarea
               className="form-control"
               id="inputDescription"
               placeholder="Type food contents here.."
-              value={description}
-              required
-              onChange={handleDescriptionChange}
+              value={content}
+              disabled
+              onChange={handleContentChange}
             ></textarea>
           </div>
         </div>
@@ -60,29 +76,25 @@ const DonationForm = ({ onCreated, foodheroid, token }) => {
                 marginBottom: "-0.5rem",
               }}
             >
-              Expires at:
+              Distance:
             </label>
             <input
-              type="date"
-              pattern="\d{4}-\d{2}-\d{2}"
+              type="text"
               className="form-control col-md-12 mt-2"
-              value={expiryDate}
-              min={formattedCurrentDate}
-              name="expiryDate"
-              id="expiryDate"
+              value={distance}
+              id="expire"
               style={{
                 width: "48.5%",
                 marginRight: "1.5%",
                 display: "inline-block",
               }}
-              required
-              onChange={handleExpiryDateChange}
+               disabled
             />
 
             <input
               type="submit"
               className="form-control btn btn-success col-md-12"
-              value="Submit Your Donation"
+              value="Confirm"
               style={{
                 width: "48.5%",
                 marginLeft: "1.5%",
@@ -98,4 +110,4 @@ const DonationForm = ({ onCreated, foodheroid, token }) => {
   );
 };
 
-export default DonationForm;
+export default CollectionForm;
