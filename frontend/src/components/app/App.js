@@ -5,8 +5,10 @@ import SignUpForm from "../Collector/SignUpForm";
 import DonatorSignUpForm from '../Donator/SignUpForm';
 import DonatorFeed from '../donatorFeed/DonatorFeed';
 import CollectorFeed from '../collectorFeed/CollectorFeed';
+import CodeConfirmation from '../codeConfirmation/CodeConfirmation';
 import React from "react";
 import { useNavigate, Routes, Route } from "react-router-dom";
+
 
 const App = () => {
   return (
@@ -17,6 +19,7 @@ const App = () => {
       <Route path="/login/donator" element={<LoginDonator navigate={useNavigate()} />} />
       <Route path="/foodhero/:id" element={<DonatorFeed navigate={useNavigate()} />} />
       <Route path="/foodrescuer/:id" element={<CollectorFeed navigate={useNavigate()} />} />
+      <Route path="/confirmation" element={<CodeConfirmation navigate={useNavigate()} />} />
     </Routes>
   );
 };
