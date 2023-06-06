@@ -26,7 +26,7 @@ mongoose.connect(mongoDbUrl, {
 
 const db = mongoose.connection;
 db.on('open', () => {console.log('Connected to MongoDB');});
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+// db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 /**
  * Create HTTP server.

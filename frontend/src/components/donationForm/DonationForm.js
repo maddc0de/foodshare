@@ -1,18 +1,15 @@
 import React, { useState } from "react";
 import "./DonatorForm.css";
 
-const DonationForm = ({ onCreated, foodheroid }) => {
-  const produceCode = () => {
-    const min = 1000;
-    const max = 9999
-    return Math.floor(Math.random() * (max - min + 1) + min).toString()
-  }
 
-  const [content, setContent] = useState("");
-  const [token, setToken] = useState(window.localStorage.getItem("token"));
-  const [expire, setExpire] = useState("");
+const DonationForm = ({ onCreated, foodheroid, token }) => {
+  const [description, setDescription] = useState("");
+  const [expiryDate, setExpiryDate] = useState("");
   const [location, setLocation] = useState(window.localStorage.getItem("location"));
-  const [code, setCode] = useState(produceCode());
+  
+  const currentDate = new Date();
+  currentDate.setDate(currentDate.getDate() + 1); // Add one day to the current date
+  const formattedCurrentDate = currentDate.toISOString().split("T")[0];
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -23,26 +20,19 @@ const DonationForm = ({ onCreated, foodheroid }) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({
-        food_heroes_id: foodheroid,
-        description: content,
-        token: token,
-        expire: expire,
-        food_hero_location: location,
-        code: code
-      }),
-    });
+      body: JSON.stringify({ food_heroes_id: foodheroid, description: description, expiryDate: expiryDate, token: token })
+    })
 
     onCreated();
   };
 
-  const handleContentChange = (event) => {
-    setContent(event.target.value);
-  };
+  const handleDescriptionChange = (event) => {
+    setDescription(event.target.value)
+  }
 
-  const handleExpireChange = (event) => {
-    setExpire(event.target.value);
-  };
+  const handleExpiryDateChange = (event) => {
+    setExpiryDate(event.target.value)
+  }
 
   return (
     <>
@@ -55,9 +45,9 @@ const DonationForm = ({ onCreated, foodheroid }) => {
               className="form-control"
               id="inputDescription"
               placeholder="Type food contents here.."
-              value={content}
+              value={description}
               required
-              onChange={handleContentChange}
+              onChange={handleDescriptionChange}
             ></textarea>
           </div>
         </div>
@@ -73,17 +63,20 @@ const DonationForm = ({ onCreated, foodheroid }) => {
               Expires at:
             </label>
             <input
-              type="time"
+              type="date"
+              pattern="\d{4}-\d{2}-\d{2}"
               className="form-control col-md-12 mt-2"
-              id="expire"
+              value={expiryDate}
+              min={formattedCurrentDate}
+              name="expiryDate"
+              id="expiryDate"
               style={{
                 width: "48.5%",
                 marginRight: "1.5%",
                 display: "inline-block",
               }}
               required
-              value={expire}
-              onChange={handleExpireChange}
+              onChange={handleExpiryDateChange}
             />
 
             <input

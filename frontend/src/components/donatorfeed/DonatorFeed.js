@@ -10,7 +10,28 @@ const DonatorFeed = ({ navigate }) => {
   const [showDonationForm, setShowDonationForm] = useState(false);
   const [foodHeroId, setFoodHeroId] = useState(id);
   const [owner, setOwner] = useState("Food Hero");
+  const [donationsByDonator, setdonationsByDonator] = useState([]);
   const [donationsList, setDonationsList] = useState([]);
+  const [needsRefresh, setRefresh] = useState(false);
+  
+
+  useEffect(() => {
+    if(token) {
+      fetch(`/donations/${id}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+        .then(response => response.json())
+        .then(async data => {
+          window.localStorage.setItem("token", data.token)
+          setToken(window.localStorage.getItem("token"))
+          console.log(data)
+          setdonationsByDonator(data.donations);
+        })
+    }
+  }, [needsRefresh])
+    
 
   const handleAddDonationClick = () => {
     setShowDonationForm(true);
@@ -22,6 +43,7 @@ const DonatorFeed = ({ navigate }) => {
 
   const handleDonationCreated = () => {
     setShowDonationForm(false);
+    setRefresh(!needsRefresh);
   };
 
   const statusDropdown = (format, name, disabled) => {
@@ -111,6 +133,19 @@ const DonatorFeed = ({ navigate }) => {
           </div>
           <div className="row ps-5 pe-1">
             <div className="col">{donation.donationInfo}</div>
+        {/* <h1>Hello, Hero!</h1>
+        
+        {showDonationForm && token ?
+          <div>
+            <DonationForm onCreated={handleDonationCreated} foodheroid={foodHeroId} token={token}/>
+          </div> :
+          <div id="feed">
+            <button onClick={handleAddDonationClick}>Add Donation</button>
+            <div id="donations-list" >
+              <h2>Donations</h2>
+              {donationsByDonator.map((donation) => (
+                <div key={donation._id}>{donation.description}</div>))}
+            </div> */}
           </div>
           <hr className="mb-1"></hr>
           <div className="row">
