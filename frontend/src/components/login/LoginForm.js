@@ -33,7 +33,7 @@ const LoginForm = (props) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ email: email, password: password }),
-    })
+      })
       .then((response) => response.json())
       .then((data) => {
         if ("message" in data && data.message !== "OK") {

@@ -193,7 +193,8 @@ const DonatorFeed = ({ navigate }) => {
       </>
     );
   } else {
-    navigate("/signup/donator");
+    <navigate to='/signup/donator' />
+
   }
 };
 
