@@ -17,10 +17,9 @@ const DonationsController = {
   GetDonationsByDonator: async (req, res) => {
     try {
       const { foodHeroId } = req.params;
-      const donations = await Donation.find({ food_heroes_id: foodHeroId })
-        .sort({ dateCreated: -1 })
+      const donations = await Donation.find({ foodHeroId: foodHeroId })
         .exec();
-      const token = await TokenGenerator.jsonwebtoken(req.user_id);
+      const token = await TokenGenerator.jsonwebtoken(req.foodHeroId);
       donations.sort((a, b) => a.expiryDate - b.expiryDate); // sort donations to closest expiry date first
       res.status(200).json({ donations: donations, token: token });
     } catch (err) {
@@ -41,11 +40,8 @@ const DonationsController = {
   CollectDonation: async (req, res) => {
     try {
       const foodRescuerId = req.params.foodRescuerId;
-      console.log(foodRescuerId)
       const update = req.body;
-      console.log(update)
       const updatedDonation = await Donation.findOneAndUpdate({ _id: req.body.donationId }, { $set: update }, { new: true });
-      console.log(updatedDonation);
       const token = await TokenGenerator.jsonwebtoken(req.params.foodRescuerId);
       res.json({ token, updatedDonation })
     } catch (err) {
