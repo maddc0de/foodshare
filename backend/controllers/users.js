@@ -27,8 +27,18 @@ const UsersController = {
       }
     });
   },
-};
 
+  GetUserName: (req, res) => {
+    const userId = (req.params.id);
+    const user = User.findOne({_id: userId}, async (err, user) => {
+      if (err) {
+        throw err;
+      }
+      res.status(200).json( user.name );
+    });
+  },
+
+};
 
 module.exports = UsersController;
 

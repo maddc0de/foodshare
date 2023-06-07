@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 
 const DonationSchema = new mongoose.Schema({
-  food_heroes_id: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  foodHeroId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   description: { type: String, required: true },
   expiryDate: { type: Date, required: true },
   status: { type: String, default: "available" },
   code: { type: String, default: generateCode, unique: true },
-  
+  foodRescuerName: { type: String },
 });
 
 function generateCode() {
