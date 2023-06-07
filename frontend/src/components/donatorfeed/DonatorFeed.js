@@ -9,6 +9,7 @@ const DonatorFeed = ({ navigate }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [showDonationForm, setShowDonationForm] = useState(false);
   const [foodHeroId, setFoodHeroId] = useState(id);
+  const [foodHeroName, setFoodHeroName] = useState(id);
   const [owner, setOwner] = useState("Food Hero");
   const [donationsByDonator, setdonationsByDonator] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -33,10 +34,16 @@ const DonatorFeed = ({ navigate }) => {
         .then(async data => {
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
-          console.log(data)
           setdonationsByDonator(data.donations);
+          console.log(`THIS ARE THE DONATIONS BY THE DONATOR: ${donationsByDonator}`)
         })
     }
+
+    fetch(`/users/${id}`)
+      .then(response => response.json())
+      .then(async dataName => {
+        setFoodHeroName(dataName);
+    })
   }, [needsRefresh])
     
 
@@ -130,6 +137,7 @@ const DonatorFeed = ({ navigate }) => {
                   <DonationForm
                     onCreated={handleDonationCreated}
                     foodheroid={foodHeroId}
+                    foodheroname={foodHeroName}
                     token={token}
                   />
                   <div className="col mt-2">

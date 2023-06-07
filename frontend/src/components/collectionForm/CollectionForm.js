@@ -1,35 +1,33 @@
 import React, { useState } from "react";
 
-const CollectionForm = ({ onCreated, foodRescuerId, donationId, donationInfo, useDistance, foodHero }) => {
-  const [content, setContent] = useState(donationInfo);
+const CollectionForm = ({ onCreated, foodRescuerId, foodRescuerName, donationInfo, donationId, foodHeroName }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
-  const [donator, setdonator] = useState(foodHero);
-  const [name, setName] = useState(window.localStorage.getItem("name"));
-  const [distance, setDistance] = useState(useDistance)
+  const [name, setName] = useState("");
 
-  const handleSubmit = async (event) => {
+  console.log(`THIS IS THE RESCUERS NAME IN COLLECTION FORM: ${foodRescuerName}`);
+  const handleSubmit =  async (event) => {
     event.preventDefault();
 
-    let response = await fetch("/donations", {
-      method: "post",
+    let response = await fetch(`/donations/${foodRescuerId}`, {
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        food_rescuer_id: foodRescuerId,
-        donation_id: donationId,
-        name: name,
-        token: token
-      }),
+        donationId: donationId,
+        status: "completed",
+        foodRescuerName: foodRescuerName
+      })
     });
-
+    const data = await response.json();
     onCreated();
   };
 
-  const handleContentChange = (event) => {
-    setContent(event.target.value);
-  };
+
+  // const handleContentChange = (event) => {
+  //   setContent(event.target.value);
+  // };
 
 
 
@@ -48,48 +46,28 @@ const CollectionForm = ({ onCreated, foodRescuerId, donationId, donationInfo, us
             >
               Food Hero:
             </label>
-            <input
+            {/* <input
               type="text"
               className="form-control col-md-12 mt-2"
               value={donator}
               id="donator"
      
                disabled
-            />
+            /> */}
             <label htmlFor="inputDescription">Description</label>
-            <textarea
+            {/* <textarea>
               className="form-control"
               id="inputDescription"
               placeholder="Type food contents here.."
               value={content}
               disabled
               onChange={handleContentChange}
-            ></textarea>
+            </textarea> */}
           </div>
         </div>
         <div className="form-row form-group">
           <div className="col col-md-12 mt-1 mb-3">
-            <label
-              htmlFor="expire"
-              style={{
-                display: "block",
-                marginBottom: "-0.5rem",
-              }}
-            >
-              Distance:
-            </label>
-            <input
-              type="text"
-              className="form-control col-md-12 mt-2"
-              value={distance}
-              id="expire"
-              style={{
-                width: "48.5%",
-                marginRight: "1.5%",
-                display: "inline-block",
-              }}
-               disabled
-            />
+      
 
             <input
               type="submit"
