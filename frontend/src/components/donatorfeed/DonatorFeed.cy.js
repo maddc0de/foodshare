@@ -13,9 +13,23 @@ describe("donator feed page, which contains a list of donations and their status
               body: response,
             }
         });
-    })
+    });
     cy.get("#DonatorFeed").should('not.be.empty')
     cy.log('app.js loaded')
     cy.log('index.css loaded')
   })
+  // it("checks that it is loading the correct page for the user, use test environment", () => {
+  //   cy.mount(<DonatorFeed />);
+
+  // })
+  // Error message
+  it("returns an error message if the user does not enter the correct email and/or password", () => {
+    cy.mount(<DonatorFeed />);
+    cy.intercept("POST", "/foodhero/:id", (req) => { 
+      req.reply({
+        statusCode: 401,
+        body: "Sorry Food Hero, we have failed to login, please check the password and email used in the process."
+      })
+    });
+  });
 })

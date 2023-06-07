@@ -2,7 +2,7 @@
  * Module dependencies.
  */
 
-// const debug = require('debug')('foodshare:server');
+const debug = require('debug')('foodshare:server');
 const http = require('http');
 const mongoose = require('mongoose');
 const app = require('../app');
