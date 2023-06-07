@@ -7,6 +7,7 @@ import DonatorFeed from '../donatorFeed/DonatorFeed';
 import CollectorFeed from '../collectorFeed/CollectorFeed';
 import React from "react";
 import { useNavigate, Routes, Route } from "react-router-dom";
+import CollectorAccount from '../collectorAccountPage/CollectorAccountPage';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
       <Route path="/login/donator" element={<LoginDonator navigate={useNavigate()} />} />
       <Route path="/foodhero/:id" element={<DonatorFeed navigate={useNavigate()} />} />
       <Route path="/foodrescuer/:id" element={<CollectorFeed navigate={useNavigate()} />} />
+      <Route path ="/foodrescuer/:id/account" element={<CollectorAccount navigate={useNavigate()} />} />
     </Routes>
   );
 };

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import CollectionForm from "../collectionForm/CollectionForm";
 import Navbar from "../navbar/Navbar";
+import { Link } from "react-router-dom";
 
 const CollectorFeed = ({ navigate }) => {
   const { id } = useParams();
@@ -181,12 +182,14 @@ const CollectorFeed = ({ navigate }) => {
                 <div className="sticky-top">
                   <div id="feed" className="row">
                     <div className="col col-md-3">
-                      <button
-                        className="btn btn-success col col-md-12"
+                      
+                        {/* className="btn btn-success col col-md-12"
                         type="submit"
-                      >
+                      > */}
+                        <Link to={`collector/${id}/account`} >
                         My Account
-                      </button>
+                        </Link>
+                      
                     </div>
                     <div className="col col-md-6">
                       <input
