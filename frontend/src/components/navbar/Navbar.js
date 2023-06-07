@@ -1,32 +1,54 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, render } from "react";
 
-const Navbar = (props, { navigate }) => {
-  const [owner, setOwner] = useState("");
+const Navbar = ({ owner, navigate }) => {
   const [checked, setChecked] = useState("");
   const changeOwner = () => {
     let newOwner;
-    if(props.owner === 'Food Rescuer'){
-      newOwner = 'donator';
-    }else{
-      newOwner = 'collector';
-      
+    if (owner === "Food Rescuer") {
+      newOwner = "donator";
+    } else {
+      newOwner = "collector";
     }
-    let path = window.location.href.split('#')[0].split('/')
-    path.pop()
-    path.push(newOwner)
-    window.location.href = path.join('/')
+    let path = window.location.href.split("#")[0].split("/");
+    path.pop();
+    path.push(newOwner);
+    window.location.href = path.join("/");
   };
 
+  const logout = () => {
+    navigate('/login/donator')
+  }
+
   useEffect(() => {
-    if(props.owner !== 'Food Rescuer'){
-      setChecked("checked")
+    if (owner !== "Food Rescuer") {
+      setChecked("checked");
     }
   }, []);
+
+  const ownerIsPresent = () => {
+    return (
+      <div className="navbar-nav ms-auto me-5">
+        <div className="form-check form-switch">
+          <input
+            className="form-check-input"
+            type="checkbox"
+            role="switch"
+            id="flexSwitchCheckDefault"
+            onChange={changeOwner}
+            checked={checked}
+          />
+          <label className="form-check-label" htmlFor="flexSwitchCheckDefault">
+            {owner}
+          </label>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <>
       <nav
-        className="navbar navbar-expand-lg navbar-light bg-light"
+        className="navbar navbar-expand-lg navbar-light bg-light fixed-top"
         style={{ boxShadow: "0 0.125rem 0.125rem 0 rgba(0, 0, 0, .3" }}
       >
         <button
@@ -41,7 +63,6 @@ const Navbar = (props, { navigate }) => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-          
           <a className="navbar-brand ms-5" href="#">
             <img
               src={require("./logo.svg").default}
@@ -60,24 +81,34 @@ const Navbar = (props, { navigate }) => {
               </a>
             </li>
           </ul>
-          <div className="navbar-nav ms-auto me-5">
-            <div className="form-check form-switch">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                role="switch"
-                id="flexSwitchCheckDefault"
-                onChange={changeOwner}
-                checked = {checked}
-              />
-              <label
-                className="form-check-label"
-                htmlFor="flexSwitchCheckDefault"
-              >
-                { props.owner }
-              </label>
-            </div>
-          </div>
+          {(function () {
+            if (owner !== "") {
+              return (
+                <div className="navbar-nav ms-auto me-5">
+                  <div className="form-check form-switch">
+                    <input
+                      className="form-check-input"
+                      type="checkbox"
+                      role="switch"
+                      id="flexSwitchCheckDefault"
+                      onChange={changeOwner}
+                      checked={checked}
+                    />
+                    <label
+                      className="form-check-label"
+                      htmlFor="flexSwitchCheckDefault"
+                    >
+                      {owner}
+                    </label>
+                  </div>
+                </div>
+              );
+            } else {
+              return <div className="navbar-nav ms-auto me-5">
+                <input type="button" value="Logout" onClick={logout} className="btn btn-secondary"/>
+                </div>
+            }
+          })()}
         </div>
       </nav>
     </>

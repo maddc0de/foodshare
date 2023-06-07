@@ -9,36 +9,70 @@ const DonatorSignUpForm = ({ navigate }) => {
   const [usertype, setUserType] = useState("Hero");
   const [password, setPassword] = useState("");
   const [owner, setOwner] = useState("Food Hero");
+  const [errors, setErrors] = useState([]);
   // const [picture, SetUserPicture] = useState("");
-
+  window.localStorage.setItem("app-route", "signup")
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const requestBody = JSON.stringify({
-      name: name,
-      email: email,
-      description: description,
-      location: location,
-      usertype: usertype,
-      password: password,
-    });
+    // const formData = new FormData();
+    // formData.append('email', email);
+    // formData.append('name', name);
+    // formData.append('description', description);
+    // formData.append('location', location);
+    // formData.append('password', password);
+    // formData.append('usertype', "Hero ");
 
-    fetch("/donators", {
-      method: "post",
-      headers: {
+
+
+    // const requestBody = JSON.stringify({
+    //   name: name,
+    //   email: email,
+    //   description: description,
+    //   location: location,
+    //   usertype: usertype,
+    //   password: password,
+    // });
+    
+
+  fetch('/users', {
+    method: 'POST',
+    // body: formData,
+     headers: {
         "Content-Type": "application/json",
       },
-      body: requestBody,
-    }).then((response) => {
-      // come back later, and re-make the route
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        description: description,
+        location: location,
+        usertype: usertype,
+        password: password,
+      })
+  })
+    .then((response) => {
+       // come back later, and re-make the route
       if (response.status === 201) {
-        navigate("/login");
+        navigate('/login/donator');
         // setWelcomeMessage(`Welcome ${email}!`)
       } else {
-        navigate("/signup");
+        // if (response.status === 400) {
+        //   response.json().then((data) => {
+        //     setErrors(data.message);
+        //   });
+        // }
+        navigate('/signup/donator');
       }
+    })
+    .catch((errors) => {
+      console.log(errors);
     });
-  };
+};
+
+const navigateToLogin = () => {
+  navigate("/login/donator");
+};
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -56,17 +90,14 @@ const DonatorSignUpForm = ({ navigate }) => {
     setLocation(event.target.value);
   };
 
-  // const handleUsertypeChange = (event) => {
-  //   setUsertype(event.target.value)
-  // }
-
-  const navigateToLogin = () => {
-    <navigate to='/login/donator' />
+  const handleUsertypeChange = (event) => {
+    setUserType(event.target.value)
   }
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
+
 
   return (
     <>
@@ -76,87 +107,37 @@ const DonatorSignUpForm = ({ navigate }) => {
         <div className="row mt-5">
           <div className="col"></div>
           <div className="col">
-            <form>
+            <form form onSubmit={handleSubmit}>
               <div className="form-row">
                 <div className="form-group col-md-12 mt-1">
                   <label htmlFor="inputName3">Name</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="inputName3"
-                    placeholder="Name"
-                  />
-                </div>
-                <div className="form-group col-md-12 mt-1">
-                  <label htmlFor="inputEmail4">Email</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="inputEmail4"
-                    placeholder="Email"
-                  />
-                </div>
-                <div className="form-group col-md-12 mt-1">
-                  <label htmlFor="inputPassword4">Password</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="inputPassword4"
-                    placeholder="Password"
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="inputAddress">Address</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="inputAddress"
-                    placeholder="1234 Main St"
-                  />
-                  <div className="mt-1">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="City"
-                      style={{
-                        width: "47.5%",
-                        marginRight: "2.5%",
-                        display: "inline-block",
-                      }}
-                    />
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Postcode"
-                      style={{
-                        width: "47.5%",
-                        marginLeft: "2.5%",
-                        display: "inline-block",
-                      }}
-                    />
+                  <input placeholder="Name" id="name" type='text' value={ name } onChange={ handleNameChange } />
                   </div>
-                </div>
+                  <div className="form-group col-md-12 mt-1">
+                  <label htmlFor="inputEmail4">Email</label>
+                  <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
+                  </div>
+                  <div className="form-group col-md-12 mt-1">
+                  <label htmlFor="inputPassword4">Password</label>
+                  <input placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} />
+                  </div>
+
+                  <div className="form-group">
+                  <label htmlFor="inputAddress">Address</label>
+                  <input placeholder="Location" id="location" type='text' value={ location } onChange={handleLocationChange} />
+                  </div>
 
                 <div className="form-group">
-                  <label htmlFor="inputDescription">Description</label>
-                  <textarea
-                    type="text"
-                    className="form-control"
-                    id="inputDescription"
-                    placeholder="We are a small Coffee Shop.."
-                  ></textarea>
+                <label htmlFor="inputDescription">Description</label>
+                <input placeholder="Description" id="description" type='text' value={ description } onChange={handleDescriptionChange} />
                 </div>
+              
 
                 <div className="form-group col-md-12 mt-3">
-                  <input
-                    type="button"
-                    className="form-control btn btn-primary"
-                    value="Become a Food Hero"
-                  />
+                <input id='submit' type="submit" value="Submit" />
                 </div>
                 <div className="form-group col-md-12 mt-3">
-                  <label
+                <label
                     htmlFor="inputButton"
                     className="col-md-12 text-center"
                   >
@@ -167,7 +148,7 @@ const DonatorSignUpForm = ({ navigate }) => {
                     className="form-control btn btn-secondary"
                     id="inputButton"
                     value="Login"
-                    onClick={navigateToLogin}
+                    onClick={ navigateToLogin }
                   />
                 </div>
               </div>
