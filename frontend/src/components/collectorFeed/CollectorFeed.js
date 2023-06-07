@@ -10,22 +10,21 @@ const CollectorFeed = ({ navigate }) => {
   const [foodRescuerId, setFoodRescuerId] = useState(
     window.localStorage.getItem("id")
   );
-  const [rescuerLocation, setRescuerLocation] = useState("sasd"); //window.localStorage.getItem("location")
   const [donationId, setDonationId] = useState("");
   const [owner, setOwner] = useState("Food Rescuer");
   const [donationsList, setDonationsList] = useState([]);
-  const [foodHero, setFoodHero] = useState("");
   const [donationInfo, setDonationInfo] = useState("");
+  const [foodHeroName, setFoodHeroName] = useState("");
   const [needsRefresh, setRefresh] = useState(false);
 
   const handleAddCollectionClick = (
     donationId,
     donationInfo,
-    heroName
+    foodHeroName
   ) => {
     setDonationId(donationId);
     setDonationInfo(donationInfo);
-    setFoodHero(heroName);
+    setFoodHeroName(foodHeroName);
     // console.log('>>>>', event)
     setShowCollectionForm(true);
   };
@@ -85,7 +84,7 @@ const CollectorFeed = ({ navigate }) => {
                   handleAddCollectionClick(
                     donation["_id"],
                     donation.description,
-                    donation["food_hero_name"]
+                    donation.foodHeroName
                   )
                 }
                 className="btn btn-primary  col col-md-12"
@@ -99,7 +98,7 @@ const CollectorFeed = ({ navigate }) => {
           </div>
           <hr className="mb-1"></hr>
           <div className="row">
-            <div className="col">Food Hero: {donation["food_hero_name"]}</div>
+            <div className="col">Food Hero: {donation.foodHeroName}</div>
             <div className="col text-end">Expires: {formatDate(donation.expiryDate)}</div>
           </div>
         </div>
@@ -121,10 +120,10 @@ const CollectorFeed = ({ navigate }) => {
                 <div className="row">
                   <CollectionForm
                     onCreated={handleCollectionCreated}
-                    foodRescuerId={foodRescuerId}
+                    foodRescuerId={id}
                     donationInfo={donationInfo}
                     donationId={donationId}
-                    foodHero={foodHero}
+                    foodHeroName={foodHeroName}
                   />
                   <div className="col mt-2">
                     <input

@@ -1,32 +1,31 @@
 import React, { useState } from "react";
 
-const CollectionForm = ({ onCreated, foodRescuerId, donationId, donationInfo, foodHero }) => {
-  const [content, setContent] = useState(donationInfo);
+const CollectionForm = ({ onCreated, foodRescuerId, donationInfo, donationId, foodHeroName }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
-  const [donator, setdonator] = useState(foodHero);
-  const [name, setName] = useState(window.localStorage.getItem("name"));
+  const [name, setName] = useState("");
 
   const handleSubmit =  (event) => {
     event.preventDefault();
 
-    fetch(`/donations/${donationId}`, {
+    fetch(`/donations/${foodRescuerId}`, {
       method: "patch",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        foodRescuerId: foodRescuerId,
-        foodRescuerName: 'name'
+        donationId: donationId,
+        status: "completed",
+        foodRescuerName: name
       }),
     });
 
     onCreated();
   };
 
-  const handleContentChange = (event) => {
-    setContent(event.target.value);
-  };
+  // const handleContentChange = (event) => {
+  //   setContent(event.target.value);
+  // };
 
 
 
@@ -45,23 +44,23 @@ const CollectionForm = ({ onCreated, foodRescuerId, donationId, donationInfo, fo
             >
               Food Hero:
             </label>
-            <input
+            {/* <input
               type="text"
               className="form-control col-md-12 mt-2"
               value={donator}
               id="donator"
      
                disabled
-            />
+            /> */}
             <label htmlFor="inputDescription">Description</label>
-            <textarea
+            {/* <textarea>
               className="form-control"
               id="inputDescription"
               placeholder="Type food contents here.."
               value={content}
               disabled
               onChange={handleContentChange}
-            ></textarea>
+            </textarea> */}
           </div>
         </div>
         <div className="form-row form-group">
