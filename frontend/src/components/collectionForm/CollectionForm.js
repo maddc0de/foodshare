@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 
-const CollectionForm = ({ onCreated, foodRescuerId, donationInfo, donationId, foodHeroName }) => {
+const CollectionForm = ({ onCreated, foodRescuerId, foodRescuerName, donationInfo, donationId, foodHeroName }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [name, setName] = useState("");
 
-  const handleSubmit =  (event) => {
+  console.log(`THIS IS THE RESCUERS NAME IN COLLECTION FORM: ${foodRescuerName}`);
+  const handleSubmit =  async (event) => {
     event.preventDefault();
 
-    fetch(`/donations/${foodRescuerId}`, {
-      method: "patch",
+    let response = await fetch(`/donations/${foodRescuerId}`, {
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -16,12 +17,13 @@ const CollectionForm = ({ onCreated, foodRescuerId, donationInfo, donationId, fo
       body: JSON.stringify({
         donationId: donationId,
         status: "completed",
-        foodRescuerName: name
-      }),
+        foodRescuerName: foodRescuerName
+      })
     });
-
+    const data = await response.json();
     onCreated();
   };
+
 
   // const handleContentChange = (event) => {
   //   setContent(event.target.value);

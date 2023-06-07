@@ -7,9 +7,10 @@ const CollectorFeed = ({ navigate }) => {
   const { id } = useParams();
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [showCollectionForm, setShowCollectionForm] = useState(false);
-  const [foodRescuerId, setFoodRescuerId] = useState(
-    window.localStorage.getItem("id")
-  );
+  // const [foodRescuerId, setFoodRescuerId] = useState(
+  //   window.localStorage.getItem("id")
+  // );
+  const [foodRescuerName, setFoodRescuerName] = useState("");
   const [donationId, setDonationId] = useState("");
   const [owner, setOwner] = useState("Food Rescuer");
   const [donationsList, setDonationsList] = useState([]);
@@ -20,7 +21,8 @@ const CollectorFeed = ({ navigate }) => {
   const handleAddCollectionClick = (
     donationId,
     donationInfo,
-    foodHeroName
+    foodHeroName,
+
   ) => {
     setDonationId(donationId);
     setDonationInfo(donationInfo);
@@ -38,10 +40,7 @@ const CollectorFeed = ({ navigate }) => {
     setShowCollectionForm(false);
   };
 
-  
-
   useEffect(() => {
-    console.log(token)
     if(token) {
       fetch(`/donations`, {
         headers: {
@@ -51,12 +50,17 @@ const CollectorFeed = ({ navigate }) => {
         .then(response => response.json())
         .then(async data => {
           setToken(window.localStorage.getItem("token"))
-          console.log(data)
-  
 
           setDonationsList(data.donations);
         })
     }
+
+    fetch(`/users/${id}`)
+      .then(response => response.json())
+      .then(async data => {
+        console.log(`THIS IS THE RESCUERS NAME: ${data}`)
+        setFoodRescuerName(data);
+      })
   }, [needsRefresh])
   
 
@@ -121,6 +125,7 @@ const CollectorFeed = ({ navigate }) => {
                   <CollectionForm
                     onCreated={handleCollectionCreated}
                     foodRescuerId={id}
+                    foodRescuerName={foodRescuerName}
                     donationInfo={donationInfo}
                     donationId={donationId}
                     foodHeroName={foodHeroName}

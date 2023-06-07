@@ -52,27 +52,6 @@ const DonationsController = {
       res.status(500).json({error: "messed up again!"})
     }
   },
-
-  // CollectDonation: async (req, res) => {
-  //   try {
-  //     const { donationId } = req.params;
-  //     // // const donation = new Donation(req.body);
-  //     const donation = Donation//.find({_id: donationId});
-
-  //     await donation.findOneAndUpdate(
-  //       { _id: donationId},
-  //          req.body,
-  //           function(err, result){
-  //           res.status(200).json(
-  //               (err === null) ? {donation} : {msg: err}
-  //           );
-  //          });
-
-  //     // res.status(200).json({ donation });
-  //   } catch (err) {
-  //     res.status(500).json({ error: "Internal Server Error" });
-  //   }
-  // },
 };
 
 module.exports = DonationsController;
