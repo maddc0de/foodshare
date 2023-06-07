@@ -44,9 +44,9 @@ const DonationsController = {
       console.log(foodRescuerId)
       const update = req.body;
       console.log(update)
-      const updatedDonation = await Donation.findOneAndUpdate({ _id: donationId }, { $set: update }, { new: true });
+      const updatedDonation = await Donation.findOneAndUpdate({ _id: req.body.donationId }, { $set: update }, { new: true });
       console.log(updatedDonation);
-      const token = await TokenGenerator.jsonwebtoken(foodRescuerId);
+      const token = await TokenGenerator.jsonwebtoken(req.params.foodRescuerId);
       res.json({ token, updatedDonation })
     } catch (err) {
       res.status(500).json({error: "messed up again!"})
