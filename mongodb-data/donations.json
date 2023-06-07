@@ -9,6 +9,8 @@
   "expiryDate": "2023-06-13T00:00:00.000Z",
   "status": "available",
   "code": "1234",
+  "food_rescuer_id":"6463a4d6cf310f44ab76741d",
+  "food_rescuer_name":"Maiden Lane Foodbank",
   "__v": 0
 },{
   "_id": {
@@ -21,7 +23,6 @@
   "expiryDate": "2023-06-08T00:00:00.000Z",
   "status": "available",
   "code": "1234",
-  "food_hero_location": "120 Old Broad St, London EC2N 1AR",
   "__v": 0
 },{
   "_id": {
@@ -34,6 +35,5 @@
   "expiryDate": "2023-06-08T00:00:00.000Z",
   "status": "available",
   "code": "2345",
-  "food_hero_location": "68 Goswell Rd., London EC1M 7AD",
   "__v": 0
 }]

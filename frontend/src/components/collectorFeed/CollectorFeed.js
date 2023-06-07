@@ -10,23 +10,21 @@ const CollectorFeed = ({ navigate }) => {
   const [foodRescuerId, setFoodRescuerId] = useState(
     window.localStorage.getItem("id")
   );
-  const [useDistance, setUseDistance] = useState("0");
   const [rescuerLocation, setRescuerLocation] = useState("sasd"); //window.localStorage.getItem("location")
   const [donationId, setDonationId] = useState("");
   const [owner, setOwner] = useState("Food Rescuer");
   const [donationsList, setDonationsList] = useState([]);
   const [foodHero, setFoodHero] = useState("");
   const [donationInfo, setDonationInfo] = useState("");
+  const [needsRefresh, setRefresh] = useState(false);
 
   const handleAddCollectionClick = (
     donationId,
     donationInfo,
-    distance,
     heroName
   ) => {
     setDonationId(donationId);
     setDonationInfo(donationInfo);
-    setUseDistance(distance);
     setFoodHero(heroName);
     // console.log('>>>>', event)
     setShowCollectionForm(true);
@@ -34,100 +32,60 @@ const CollectorFeed = ({ navigate }) => {
 
   const cancelAddCollectionClick = () => {
     setShowCollectionForm(false);
+    setRefresh(!needsRefresh);
   };
 
   const handleCollectionCreated = () => {
     setShowCollectionForm(false);
   };
 
-  const mockDonations = [
-    {
-      food_hero_id: "623g263782y3g",
-      donationId: "123g263782y3g",
-      donationInfo: "4 yummy apple pies with sweet onion!",
-      heroName: "Tesco",
-      expires: "03:17",
-      location: "12 Baker Street, London, N10UR",
-    },
-    {
-      food_hero_id: "623g263782y3g",
-      donationId: "223g263782y3g",
-      donationInfo: "4 yummy apple pies with sweet onion!",
-      heroName: "Tesco",
-      expires: "03:17",
-      location: "12 Finchley Road, London, N10UR",
-    },
-    {
-      food_hero_id: "623g263782y3g",
-      donationId: "323g263782y3g",
-      donationInfo: "4 yummy apple pies with sweet onion!",
-      heroName: "Tesco",
-      expires: "03:17",
-      location: "12 High Street, London, N10UR",
-    },
-    {
-      food_hero_id: "623g263782y3g",
-      donationId: "423g263782y3g",
-      donationInfo: "4 yummy apple pies with sweet onion!",
-      heroName: "Tesco",
-      expires: "03:17",
-      location: "12 Baker Street, Manchester, N10UR",
-    },
-    {
-      food_hero_id: "623g263782y3g",
-      donationId: "523g263782y3g",
-      donationInfo: "4 yummy apple pies with sweet onion!",
-      heroName: "Tesco",
-      expires: "03:17",
-      location: "12 Baker Street, Leeds, N10UR",
-    },
-    {
-      food_hero_id: "623g263782y3g",
-      donationId: "623g263782y3g",
-      donationInfo: "4 yummy apple pies with sweet onion!",
-      heroName: "Tesco",
-      expires: "03:17",
-      location: "12 Baker , London, N10UR",
-    },
-  ];
-
-  const getDistance = (heroLocation) => {
-    const distance = (
-      Math.abs(heroLocation.length - rescuerLocation.length) / 20
-    ).toFixed(1);
-    return distance;
-  };
+  
 
   useEffect(() => {
-    const donations = mockDonations.map((donation) => {
-      console.log();
-      donation.distance = getDistance(donation.location);
-      return donation;
-    });
-    setDonationsList(donations);
-  }, []);
+    console.log(token)
+    if(token) {
+      fetch(`/donations`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+        .then(response => response.json())
+        .then(async data => {
+          setToken(window.localStorage.getItem("token"))
+          console.log(data)
+  
+
+          setDonationsList(data.donations);
+        })
+    }
+  }, [needsRefresh])
+  
+
+  const formatDate = (dateString) => {
+    const options = { year: "numeric", month: "long", day: "numeric" }
+    return new Date(dateString).toLocaleDateString(undefined, options)
+  }
+
 
   const donations = () => {
-    return donationsList.map((donation) => {
+    // return
+    return donationsList.map((donation, index) => {
       return (
         <div
-          key={donation.donationId}
+          key={index}
           className="container mb-2 border border-success border-1 rounded px-2 py-2"
         >
           <div className="row">
             <div className="ol col-md-9">
-              <button disabled className="btn btn-outline-success border-0">
-                Dist: {donation.distance} miles
-              </button>
+    
             </div>
             <div className="col col-md-3 text-end">
               <button
                 onClick={() =>
                   handleAddCollectionClick(
-                    donation.donationId,
-                    donation.donationInfo,
-                    donation.distance,
-                    donation.heroName
+                    donation["_id"],
+                    donation.description,
+                    donation["food_hero_name"]
                   )
                 }
                 className="btn btn-primary  col col-md-12"
@@ -137,12 +95,12 @@ const CollectorFeed = ({ navigate }) => {
             </div>
           </div>
           <div className="row ps-5 pe-1">
-            <div className="col">{donation.donationInfo}</div>
+            <div className="col">{donation.description}</div>
           </div>
           <hr className="mb-1"></hr>
           <div className="row">
-            <div className="col">Food Hero: {donation.heroName}</div>
-            <div className="col text-end">Expires: {donation.expires}</div>
+            <div className="col">Food Hero: {donation["food_hero_name"]}</div>
+            <div className="col text-end">Expires: {formatDate(donation.expiryDate)}</div>
           </div>
         </div>
       );
@@ -166,7 +124,6 @@ const CollectorFeed = ({ navigate }) => {
                     foodRescuerId={foodRescuerId}
                     donationInfo={donationInfo}
                     donationId={donationId}
-                    useDistance={useDistance}
                     foodHero={foodHero}
                   />
                   <div className="col mt-2">
