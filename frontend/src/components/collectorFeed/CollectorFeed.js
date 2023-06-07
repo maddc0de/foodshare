@@ -186,7 +186,7 @@ const CollectorFeed = ({ navigate }) => {
                         {/* className="btn btn-success col col-md-12"
                         type="submit"
                       > */}
-                        <Link to={`collector/${id}/account`} >
+                        <Link to={`/${id}/account`} >
                         My Account
                         </Link>
                       

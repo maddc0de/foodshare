@@ -27,6 +27,15 @@ const UsersController = {
       }
     });
   },
+
+  GetCollectorDetails: async (req, res) => {
+    try {
+      const { foodRescuer } = req.params;
+      const foodRescuer = await User.findbyID(req.params.id)
+    }
+  }
+
+
 };
 
 
