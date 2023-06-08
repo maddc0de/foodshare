@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import DonationForm from "../donationForm/DonationForm";
 import Navbar from "../navbar/Navbar";
 import "./DonatorFeed.css";
@@ -123,10 +123,8 @@ const DonatorFeed = ({ navigate }) => {
 
   if (token) {
     return (
-      <>
+      <div className="feed-box">
         <Navbar owner={""} navigate={navigate}></Navbar>
-        <h2 className="ms-5">Hello, Hero!</h2>
-
         <div className="container mt-5">
           <div className="row mt-5">
             <div className="col col-md-3"></div>
@@ -151,9 +149,13 @@ const DonatorFeed = ({ navigate }) => {
                 <div className="sticky-top">
                   <div id="feed" className="row">
                     <div className="col col-md-12 mb-3">
+                    <Link to={`/${id}/account`} className="btn btn-warning col col-md-12" >
+                        My Account
+                        </Link>
                       <button
+                        type="button"
                         onClick={handleAddDonationClick}
-                        className="btn btn-success  col col-md-12"
+                        className="btn btn-success btn-sm"
                       >
                         Add Your Donation
                       </button>
@@ -197,7 +199,7 @@ const DonatorFeed = ({ navigate }) => {
             <div className="col"></div>
           </div>
         </div>
-      </>
+      </div>
     );
   } else {
     navigate("/signup/donator");
