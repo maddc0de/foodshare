@@ -73,7 +73,7 @@ const LoginForm = (props) => {
     setPassword(event.target.value);
   };
   return (
-    <div className="login-form">
+    <div className="login-form" style={{ marginTop: "10rem" }}>
       <div className="container mt-5">
         <div className="text-center" style={{ color: "#dc3545" }}>
           {failMessage}

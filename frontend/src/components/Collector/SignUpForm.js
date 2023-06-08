@@ -74,7 +74,7 @@ const SignUpForm = ({ navigate }) => {
           <div className="col"></div>
           <div className="col">
           <form form onSubmit={handleSubmit}>
-              <div className="form-row">
+              <div className="form-row" style={{ marginTop: "10rem" }}>
                 <div className="form-group col-md-12 mt-1">
                   <label htmlFor="inputName3">Name</label>
                   <input placeholder="Name" id="name" type='text' value={ name } onChange={ handleNameChange } />
