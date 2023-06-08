@@ -70,10 +70,10 @@ const CollectionForm = ({ onCreated, foodRescuerId, foodRescuerName, donationInf
                 className="form-control btn btn-success col-md-12"
                 value="Confirm"
                 style={{
-                  width: "48.5%",
-                  marginLeft: "1.5%",
+                  width: "100%",
+                  marginLeft: "0.5%",
                   display: "inline-block",
-                  marginTop: "-0.25rem",
+                  marginTop: "1.25rem",
                 }}
               />
             </div>

@@ -1,0 +1,127 @@
+.about-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 159vh;
+    background-color: #f1f1f1;
+    margin-top: 900px;
+  }
+  
+  .calculator {
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 575px;
+    width: 100%;
+  }
+  
+  h3 {
+    font-size: 18px;
+  }
+  
+  input[type="number"] {
+    padding: 5px;
+    margin-top: 10px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    background-color: #327532;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  p {
+    margin-top: 10px;
+  }
+  
+  ps {
+    font-size: 12px;
+    margin-top: 10px;
+    color: #888;
+  }
+  
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* .container {
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    max-width: 575px;
+    width: 100%;
+    margin: 0 auto; 
+    margin-top: 700px;
+  } */
+  
+  h2 {
+    font-size: 24px;
+  }
+  
+  h3 {
+    font-size: 18px;
+    margin-top: 10px;
+  }
+  
+  input[type="number"] {
+    padding: 5px;
+    margin-top: 10px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    margin-top: 10px;
+    background-color: #040504;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  p {
+    margin-top: 10px;
+  }
+  
+  .ps {
+    font-size: 12px;
+    margin-top: 10px;
+    color: #888;
+  }
+  
+  .about-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+
+  .about-container img {
+    margin-bottom: 0px;
+    max-width: 100%;
+  }
+
+  .page-image {
+    margin-bottom: 0px;
+    max-width: 100%;
+  }
+
