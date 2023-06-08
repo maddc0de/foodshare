@@ -73,7 +73,7 @@ const LoginForm = (props) => {
   };
   return (
     <div className="login-form">
-      <img src={props.image} alt="Image" width="85" height="95" />
+      <img className="default" src={props.image} />
       <div className="container mt-5">
         <div className="text-center" style={{ color: "#dc3545" }}>
           {failMessage}

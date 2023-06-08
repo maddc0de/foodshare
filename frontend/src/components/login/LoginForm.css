@@ -54,3 +54,9 @@ input {
 #submit:hover {
   background-color: rgba(5, 104, 71, 0.847);
 }
+
+.default {
+  display: flex;
+  min-height: 75px;
+  min-width: 75px;
+}
