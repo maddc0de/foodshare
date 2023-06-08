@@ -33,6 +33,9 @@ const About = ({ navigate }) => {
         {result && <p>The CO2e produced from your weekly waste could charge your phone {result} times</p>}
         <p></p>
         <ps>*1 bag is assumed to contain 1kg of food on average</ps>
+        <p></p>
+        <p></p>
+        <p><a href="signup/donator">Sign up as Food Hero</a> | <a href="signup/collector">Sign up as Food Rescuer</a></p>
         </div>
       </div>
       </>
