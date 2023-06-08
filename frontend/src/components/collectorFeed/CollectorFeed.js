@@ -76,7 +76,7 @@ const CollectorFeed = ({ navigate }) => {
       return (
         <div
           key={index}
-          className="container mb-2 border border-success border-1 rounded px-2 py-2"
+          className="container mb-2 border border-success border-1 rounded px-2 py-2 bg-white"
         >
           <div className="row">
             <div className="ol col-md-9">
@@ -132,7 +132,7 @@ const CollectorFeed = ({ navigate }) => {
                   />
                   <div className="col mt-2">
                     <input
-                      className="btn btn-outline-secondary col-md-12"
+                      className="btn btn-secondary col-md-12"
                       id="back-button"
                       onClick={handleGoBackToFeedClick}
                       value="take me back to my feed"
