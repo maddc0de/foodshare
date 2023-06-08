@@ -9,59 +9,29 @@ const DonatorSignUpForm = ({ navigate }) => {
   const [usertype, setUserType] = useState("Hero");
   const [password, setPassword] = useState("");
   const [owner, setOwner] = useState("Food Hero");
-  const [errors, setErrors] = useState([]);
-  // const [picture, SetUserPicture] = useState("");
   window.localStorage.setItem("app-route", "signup")
   
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // const formData = new FormData();
-    // formData.append('email', email);
-    // formData.append('name', name);
-    // formData.append('description', description);
-    // formData.append('location', location);
-    // formData.append('password', password);
-    // formData.append('usertype', "Hero ");
-
-
-
-    // const requestBody = JSON.stringify({
-    //   name: name,
-    //   email: email,
-    //   description: description,
-    //   location: location,
-    //   usertype: usertype,
-    //   password: password,
-    // });
-    
-
   fetch('/users', {
     method: 'POST',
-    // body: formData,
-     headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        description: description,
-        location: location,
-        usertype: usertype,
-        password: password,
-      })
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: name,
+      email: email,
+      description: description,
+      location: location,
+      usertype: usertype,
+      password: password,
+    })
   })
     .then((response) => {
-       // come back later, and re-make the route
       if (response.status === 201) {
         navigate('/login/donator');
-        // setWelcomeMessage(`Welcome ${email}!`)
       } else {
-        // if (response.status === 400) {
-        //   response.json().then((data) => {
-        //     setErrors(data.message);
-        //   });
-        // }
         navigate('/signup/donator');
       }
     })
@@ -90,10 +60,6 @@ const navigateToLogin = () => {
     setLocation(event.target.value);
   };
 
-  const handleUsertypeChange = (event) => {
-    setUserType(event.target.value)
-  }
-
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
@@ -103,7 +69,7 @@ const navigateToLogin = () => {
     <>
       <Navbar owner={owner}></Navbar>
 
-      <div className="container mt-5">
+      <div className="container mt-5" id="signup-box">
         <div className="row mt-5">
           <div className="col"></div>
           <div className="col">
@@ -111,30 +77,33 @@ const navigateToLogin = () => {
               <div className="form-row">
                 <div className="form-group col-md-12 mt-1">
                   <label htmlFor="inputName3">Name</label>
-                  <input placeholder="Name" id="name" type='text' value={ name } onChange={ handleNameChange } />
+                  <input placeholder="Name" className="form-control" id="name" type='text' value={ name } onChange={ handleNameChange } />
                   </div>
                   <div className="form-group col-md-12 mt-1">
                   <label htmlFor="inputEmail4">Email</label>
-                  <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
+                  <input placeholder="Email" className="form-control" id="email" type='text' value={ email } onChange={handleEmailChange} />
                   </div>
                   <div className="form-group col-md-12 mt-1">
                   <label htmlFor="inputPassword4">Password</label>
-                  <input placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} />
+                  <input placeholder="Password" className="form-control" id="password" type='password' value={ password } onChange={handlePasswordChange} />
                   </div>
 
                   <div className="form-group">
                   <label htmlFor="inputAddress">Address</label>
-                  <input placeholder="Location" id="location" type='text' value={ location } onChange={handleLocationChange} />
+                  <input placeholder="Location" className="form-control" id="location" type='text' value={ location } onChange={handleLocationChange} />
                   </div>
 
                 <div className="form-group">
                 <label htmlFor="inputDescription">Description</label>
-                <input placeholder="Description" id="description" type='text' value={ description } onChange={handleDescriptionChange} />
+                <textarea placeholder="Description" className="form-control" id="description" type='text' value={ description } onChange={handleDescriptionChange} />
                 </div>
               
 
                 <div className="form-group col-md-12 mt-3">
-                <input id='submit' type="submit" value="Submit" />
+                <input
+                  type="submit"
+                  className="form-control btn btn-success"
+                  value="Become a Food Hero" />
                 </div>
                 <div className="form-group col-md-12 mt-3">
                 <label
