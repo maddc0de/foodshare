@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { useNavigate as navigate } from "react-router-dom";
 import './LoginForm.css';
 
 const LoginForm = (props) => {
-  const [email, setEmail] = useState("hackney@email.com");//tesco@email.com
-  const [password, setPassword] = useState("password");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [failMessage, setFailMessage] = useState("");
   const [owner, setOwner] = useState(`Login ${props.owner}`);
   const [ownerColor, setOwnerColor] = useState(
@@ -12,7 +11,6 @@ const LoginForm = (props) => {
       ? "form-control btn btn-primary"
       : "form-control btn btn-success"
   );
-
   const HERO = "Hero";
   const RESCUER = "Rescuer";
 
@@ -49,9 +47,6 @@ const LoginForm = (props) => {
         } else {
           console.log("yay");
           window.localStorage.setItem("token", data.token);
-          window.localStorage.setItem("location", data.location);
-          window.localStorage.setItem("id", data.id);
-          window.localStorage.setItem("name", data.name);
           if (data.usertype === HERO) {
             props.navigate(`/foodhero/${data.id}`);
           } else {
@@ -74,13 +69,14 @@ const LoginForm = (props) => {
   };
   return (
     <div className="login-form">
+      <img className="default" src={props.image} />
       <div className="container mt-5">
         <div className="text-center" style={{ color: "#dc3545" }}>
           {failMessage}
         </div>
         <div className="row mt-5">
           <div className="col"></div>
-          <div className="col">
+          <div className="col"> 
             <form onSubmit={handleSubmit}>
               <div className="form-row">
                 <div className="form-group col-md-12 mt-1">

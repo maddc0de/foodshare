@@ -31,7 +31,7 @@ const CollectorFeed = ({ navigate }) => {
     setShowCollectionForm(true);
   };
 
-  const cancelAddCollectionClick = () => {
+  const handleGoBackToFeedClick = () => {
     setShowCollectionForm(false);
     setRefresh(!needsRefresh);
   };
@@ -50,7 +50,6 @@ const CollectorFeed = ({ navigate }) => {
         .then(response => response.json())
         .then(async data => {
           setToken(window.localStorage.getItem("token"))
-
           setDonationsList(data.donations);
         })
     }
@@ -58,7 +57,6 @@ const CollectorFeed = ({ navigate }) => {
     fetch(`/users/${id}`)
       .then(response => response.json())
       .then(async data => {
-        console.log(`THIS IS THE RESCUERS NAME: ${data}`)
         setFoodRescuerName(data);
       })
   }, [needsRefresh])
@@ -133,8 +131,9 @@ const CollectorFeed = ({ navigate }) => {
                   <div className="col mt-2">
                     <input
                       className="btn btn-outline-secondary col-md-12"
-                      onClick={cancelAddCollectionClick}
-                      value="Cancel"
+                      id="back-button"
+                      onClick={handleGoBackToFeedClick}
+                      value="take me back to my feed"
                     />
                   </div>
                 </div>
