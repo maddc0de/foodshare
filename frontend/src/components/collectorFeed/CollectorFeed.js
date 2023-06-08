@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import CollectionForm from "../collectionForm/CollectionForm";
 import Navbar from "../navbar/Navbar";
+import { Link } from "react-router-dom";
+import './CollectorFeed.css'
 
 const CollectorFeed = ({ navigate }) => {
   const { id } = useParams();
@@ -31,7 +33,7 @@ const CollectorFeed = ({ navigate }) => {
     setShowCollectionForm(true);
   };
 
-  const cancelAddCollectionClick = () => {
+  const handleGoBackToFeedClick = () => {
     setShowCollectionForm(false);
     setRefresh(!needsRefresh);
   };
@@ -131,8 +133,9 @@ const CollectorFeed = ({ navigate }) => {
                   <div className="col mt-2">
                     <input
                       className="btn btn-secondary col-md-12"
-                      onClick={cancelAddCollectionClick}
-                      value="Cancel"
+                      id="back-button"
+                      onClick={handleGoBackToFeedClick}
+                      value="take me back to my feed"
                     />
                   </div>
                 </div>
@@ -140,12 +143,14 @@ const CollectorFeed = ({ navigate }) => {
                 <div className="sticky-top">
                   <div id="feed" className="row">
                     <div className="col col-md-3">
-                      <button
-                        className="btn btn-success col col-md-12"
+                      
+                        {/* className="btn btn-success col col-md-12"
                         type="submit"
-                      >
+                      > */}
+                        <Link to={`/${id}/account`} className="account-link" >
                         My Account
-                      </button>
+                        </Link>
+                      
                     </div>
                     <div className="col col-md-6">
                       <input

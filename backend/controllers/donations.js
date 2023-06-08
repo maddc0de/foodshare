@@ -27,9 +27,9 @@ const DonationsController = {
     }
   },
 
-  GetAllDonations: async (req, res) => {
+  GetAllAvailableDonations: async (req, res) => {
     try {
-      const donations = await Donation.find();
+      const donations = await Donation.find({ status: "available" });
       const token = await TokenGenerator.jsonwebtoken(req.user_id);
       res.status(200).json({ donations });
     } catch (err) {
