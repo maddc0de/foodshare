@@ -68,8 +68,10 @@ const navigateToLogin = () => {
   return (
     <>
       <Navbar owner={owner}></Navbar>
-
       <div className="container mt-5" id="signup-box">
+      <h3 class="fw-bold">We need Heroes.</h3>
+      <h3 class="fw-semibold">Be part of the solution. Cut food waste. Support local communities.</h3>
+      <h3 class="fw-semibold">Still need convincing? <a href="/about">Find out how here.</a></h3>
         <div className="row mt-5">
           <div className="col"></div>
           <div className="col">

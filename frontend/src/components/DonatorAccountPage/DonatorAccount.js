@@ -67,8 +67,7 @@ const DonatorAccount = ({ navigate }) => {
               <>
               <Navbar owner={""} navigate={navigate}></Navbar>
               <div className="dashboard">
-                <h1 className="dashboard-title">Test</h1>
-                <h3 className="dashboard-section">Your Dashboard:</h3>
+                <h1 className="dashboard-title">Your Dashboard:</h1>
       
                 <div className="dashboard-stats">
                   <div className="dashboard-stat">
@@ -101,10 +100,10 @@ const DonatorAccount = ({ navigate }) => {
       
                 <div className="dashboard-user-info">
                   <h3 className="dashboard-subsection">{name}'s Account Information:</h3>
-                  <p className="dashboard-text">Name: {name}</p>
-                  <p className="dashboard-text">Email: {email}</p>
-                  <p className="dashboard-text">Location: {location}</p>
-                  <p className="dashboard-text">Description: {description}</p>
+                  <p className="dashboard-description">Name: {name}</p>
+                  <p className="dashboard-description">Email: {email}</p>
+                  <p className="dashboard-description">Location: {location}</p>
+                  <p className="dashboard-description">Description: {description}</p>
                 </div>
               </div>
             </>
