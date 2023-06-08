@@ -123,10 +123,8 @@ const DonatorFeed = ({ navigate }) => {
 
   if (token) {
     return (
-      <>
+      <div className="feed-box">
         <Navbar owner={""} navigate={navigate}></Navbar>
-        <h2 className="ms-5">Hello, Hero!</h2>
-
         <div className="container mt-5">
           <div className="row mt-5">
             <div className="col col-md-3"></div>
@@ -201,7 +199,7 @@ const DonatorFeed = ({ navigate }) => {
             <div className="col"></div>
           </div>
         </div>
-      </>
+      </div>
     );
   } else {
     navigate("/signup/donator");
