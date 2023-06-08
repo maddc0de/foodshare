@@ -43,7 +43,7 @@ const DonatorAccount = ({ navigate }) => {
           })
       }
        
-      fetch(`/users/${id}`)
+      fetch(`/users/account/${id}`)
         .then(response => response.json())
         .then(async dataAccount => {
           setName(dataAccount.name);
