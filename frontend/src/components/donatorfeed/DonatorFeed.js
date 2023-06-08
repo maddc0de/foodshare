@@ -35,7 +35,6 @@ const DonatorFeed = ({ navigate }) => {
           window.localStorage.setItem("token", data.token)
           setToken(window.localStorage.getItem("token"))
           setdonationsByDonator(data.donations);
-          console.log(`THIS ARE THE DONATIONS BY THE DONATOR: ${donationsByDonator}`)
         })
     }
 
@@ -115,7 +114,7 @@ const DonatorFeed = ({ navigate }) => {
         </div>
         <hr className="mb-1"></hr>
         <div className="row">
-          <div className="col">Food Rescuer: {donation.collectorInfo}</div>
+          <div className="col">Food Rescuer: {donation.foodRescuerName ? (donation.foodRescuerName) : ("up for grabs")}</div>
           <div className="col text-end">Expires: {formatDate(donation.expiryDate)}</div>
         </div>
       </div>
