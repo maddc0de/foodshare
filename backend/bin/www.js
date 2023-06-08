@@ -18,7 +18,7 @@ app.set('port', port);
  * Connect to MongoDB
  * */
 
-const mongoDbUrl = process.env.MONGODB_URL || 'mongodb://0.0.0.0/foodshare';
+const mongoDbUrl = process.env.MONGODB_URL || 'mongodb://localhost:27017//foodshare_test';
 mongoose.connect(mongoDbUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
