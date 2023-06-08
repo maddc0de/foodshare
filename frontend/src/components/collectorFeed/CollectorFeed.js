@@ -76,7 +76,7 @@ const CollectorFeed = ({ navigate }) => {
           donation.description.toLowerCase().includes(searchQuery.toLowerCase())
         )
       : donationsList;
-      
+
     return filteredDonations.map((donation, index) => (
         <div
           key={index}
@@ -148,10 +148,7 @@ const CollectorFeed = ({ navigate }) => {
                   <div id="feed" className="row">
                     <div className="col col-md-3">
                       
-                        {/* className="btn btn-success col col-md-12"
-                        type="submit"
-                      > */}
-                        <Link to={`/${id}/account`} className="btn btn-success col col-md-12" >
+                        <Link to={`/${id}/account`} className="btn btn-warning col col-md-12" >
                         My Account
                         </Link>
                       

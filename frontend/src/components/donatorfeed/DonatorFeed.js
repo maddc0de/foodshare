@@ -151,12 +151,13 @@ const DonatorFeed = ({ navigate }) => {
                 <div className="sticky-top">
                   <div id="feed" className="row">
                     <div className="col col-md-12 mb-3">
-                    <Link to={`/${id}/account`} className="btn btn-success col col-md-12" >
+                    <Link to={`/${id}/account`} className="btn btn-warning col col-md-12" >
                         My Account
                         </Link>
                       <button
+                        type="button"
                         onClick={handleAddDonationClick}
-                        className="btn btn-success  col col-md-12"
+                        className="btn btn-success btn-sm"
                       >
                         Add Your Donation
                       </button>
