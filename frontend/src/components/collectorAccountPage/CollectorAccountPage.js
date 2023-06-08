@@ -11,46 +11,46 @@ const CollectorAccount = ({ navigate }) => {
   const [usertype, setUserType] = useState("Rescuer");
   const [owner, setOwner] = useState("Food Rescuer");
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    fetch("/users", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        password: password
+  useEffect(() => {
+    if(token) {
+      fetch(`/donations/${id}`, {
+        headers: {
+          'authorization': `Bearer ${token}`
+        }
       })
-    })
-    .then((response) => {
-      if (response.status === 201) {
-        navigate("/:id/account");
-      { else }
-        navigate("/id");
-      }
-    })
-    .catch((erros) => {
-      console.log(errors);
-    });
-  };
+    }
+  })
+
+  fetch(`/users/account/${id}`)
+    .then(response => response.json())
+    .then(async dataAccount => {
+      setName(dataAccount.name);
+      setEmail(dataAccount.email);
+      setPassword(dataAccount.password);
+      setUserType(dataAccount.usertype);
+}, [])
+      
 
 
 
-  const Account = () => {
+  // const Account = () => {
+  //   return (
+  //     <h1>Account Page</h1>
+  //   );
+  // };
+
+  if (token) {
     return (
-      <h1>Account Page</h1>
-    );
-  };
-
-  return (
     <div>
-      <h1>Collector Account</h1>
-      <Account />
+      <h1>Food Rescuer</h1>
+      <p>Name:{name} </p>
+      <p>Email:{email} </p>
+      <p>Password:{password} </p>
     </div>
   );
+  }
+
+  
 
 };
 
