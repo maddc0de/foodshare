@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./DonatorForm.css";
 
 
-const DonationForm = ({ onCreated, foodheroid, token }) => {
+const DonationForm = ({ onCreated, foodheroid, foodheroname, token }) => {
   const [description, setDescription] = useState("");
   const [expiryDate, setExpiryDate] = useState("");
   const [location, setLocation] = useState(window.localStorage.getItem("location"));
@@ -20,7 +20,13 @@ const DonationForm = ({ onCreated, foodheroid, token }) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ food_heroes_id: foodheroid, description: description, expiryDate: expiryDate, token: token })
+      body: JSON.stringify({ 
+        foodHeroId: foodheroid, 
+        foodHeroName: foodheroname, 
+        description: description, 
+        expiryDate: expiryDate, 
+        token: token 
+      })
     })
 
     onCreated();

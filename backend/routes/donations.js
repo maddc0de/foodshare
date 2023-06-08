@@ -6,6 +6,7 @@ const DonationsController = require("../controllers/donations");
 router.post("/", DonationsController.Create);
 router.get("/:foodHeroId", DonationsController.GetDonationsByDonator);
 router.get("/", DonationsController.GetAllDonations);
+router.patch("/:foodRescuerId", DonationsController.CollectDonation);
 
 
 
