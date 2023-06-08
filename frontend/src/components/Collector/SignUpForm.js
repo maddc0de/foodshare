@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Navbar from "../navbar/Navbar";
-import "./SignUpForm.css";
 
 const SignUpForm = ({ navigate }) => {
   const [name, setName] = useState("");
