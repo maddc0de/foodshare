@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Navbar from "../navbar/Navbar";
 import './about.css'
+import About1 from './1.png'
+import About2 from './2.png'
 
 const About = ({ navigate }) => {
     const [input, setInput] = useState('');
@@ -16,11 +18,24 @@ const About = ({ navigate }) => {
     };
   
     return (
+        <>
+    <Navbar owner={""} navigate={'navigate'}></Navbar>
+    <p></p>
       <div>
+      <div className="about-container">
+        <img src={About1} alt="Page" id="page" width="575" height="800" />
+        <img src={About2} alt="Page" id="page" width="575" height="800" />
+        </div>
+        <div className="calculator">
+        <h3>Enter approximately how many bags of waste you throw away each week:</h3>
         <input type="number" value={input} onChange={handleInputChange} />
         <button onClick={calculate}>Calculate</button>
-        {result && <p>Result: {result}</p>}
+        {result && <p>The CO2e produced from your weekly waste could charge your phone {result} times</p>}
+        <p></p>
+        <ps>*1 bag is assumed to contain 1kg of food on average</ps>
+        </div>
       </div>
+      </>
     );
 }
 
