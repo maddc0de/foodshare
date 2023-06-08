@@ -47,3 +47,5 @@ describe("Signup up", () => {
     cy.get('*[class^="form-control btn btn-secondary"]').click();
   });
 });
+
+//Finished

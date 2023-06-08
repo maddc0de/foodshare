@@ -30,3 +30,5 @@ describe("donator feed page, which contains a list of donations and their status
     });
   });
 })
+
+//Finished
