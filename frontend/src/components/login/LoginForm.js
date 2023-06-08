@@ -49,9 +49,6 @@ const LoginForm = (props) => {
         } else {
           console.log("yay");
           window.localStorage.setItem("token", data.token);
-          window.localStorage.setItem("location", data.location);
-          window.localStorage.setItem("id", data.id);
-          window.localStorage.setItem("name", data.name);
           if (data.usertype === HERO) {
             props.navigate(`/foodhero/${data.id}`);
           } else {
