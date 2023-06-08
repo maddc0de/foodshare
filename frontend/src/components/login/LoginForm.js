@@ -12,7 +12,6 @@ const LoginForm = (props) => {
       ? "form-control btn btn-primary"
       : "form-control btn btn-success"
   );
-
   const HERO = "Hero";
   const RESCUER = "Rescuer";
 
@@ -74,13 +73,14 @@ const LoginForm = (props) => {
   };
   return (
     <div className="login-form">
+      <img src={props.image} alt="Image" width="85" height="95" />
       <div className="container mt-5">
         <div className="text-center" style={{ color: "#dc3545" }}>
           {failMessage}
         </div>
         <div className="row mt-5">
           <div className="col"></div>
-          <div className="col">
+          <div className="col"> 
             <form onSubmit={handleSubmit}>
               <div className="form-row">
                 <div className="form-group col-md-12 mt-1">
