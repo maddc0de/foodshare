@@ -66,6 +66,7 @@ const SignUpForm = ({ navigate }) => {
                   <label htmlFor="inputName3">Name</label>
                   <input 
                     type="text"
+                    className="form-control"
                     id="inputName3"  
                     placeholder="Name" 
                     value={ name } 
