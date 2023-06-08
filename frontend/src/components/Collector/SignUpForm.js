@@ -9,25 +9,39 @@ const SignUpForm = ({ navigate }) => {
   const [password, setPassword] = useState("");
   const [usertype, setUserType] = useState("Rescuer");
   const [owner, setOwner] = useState("Food Rescuer");
+  const [errors, setErrors] = useState([]);
+  window.localStorage.setItem("app-route", "signup")
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("email", email);
-    formData.append("password", password);
-    formData.append("usertype", usertype);
+    // const formData = new FormData();
+    // formData.append("name", name);
+    // formData.append("email", email);
+    // formData.append("password", password);
+    // formData.append("usertype", usertype);
 
     fetch("/users", {
       method: "POST",
-      body: formData,
-    }).then((response) => {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        usertype: usertype,
+        password: password,
+      })
+    })
+    .then((response) => {
       if (response.status === 201) {
-        navigate("/login");
+        navigate("/login/collector");
       } else {
-        navigate("/signup");
+        navigate("/signup/collector");
       }
+    })
+    .catch((errors) => {
+      console.log(errors);
     });
   };
 
@@ -59,41 +73,24 @@ const SignUpForm = ({ navigate }) => {
         <div className="row mt-5">
           <div className="col"></div>
           <div className="col">
-            <form>
+          <form form onSubmit={handleSubmit}>
               <div className="form-row">
                 <div className="form-group col-md-12 mt-1">
                   <label htmlFor="inputName3">Name</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="inputName3"
-                    placeholder="Name"
-                  />
+                  <input placeholder="Name" id="name" type='text' value={ name } onChange={ handleNameChange } />
                 </div>
                 <div className="form-group col-md-12 mt-1">
                   <label htmlFor="inputEmail4">Email</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="inputEmail4"
-                    placeholder="Email"
-                  />
+                  <input placeholder="Email" id="email" type='text' value={ email } onChange={handleEmailChange} />
                 </div>
                 <div className="form-group col-md-12 mt-1">
                   <label htmlFor="inputPassword4">Password</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="inputPassword4"
-                    placeholder="Password"
-                  />
+                  <input placeholder="Password" id="password" type='password' value={ password } onChange={handlePasswordChange} />
                 </div>
+
+
                 <div className="form-group col-md-12 mt-3">
-                  <input
-                    type="button"
-                    className="form-control btn btn-success"
-                    value="Become a Food Rescuer"
-                  />
+                <input id='submit' type="submit" value="Submit" />
                 </div>
                 <div className="form-group col-md-12 mt-3">
                   <label htmlFor="inputButton" className="col-md-12 text-center">Already a member? Click here to login</label>

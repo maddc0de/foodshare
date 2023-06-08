@@ -1,0 +1,18 @@
+.collector-account-container {
+  margin-top: 60px; 
+  margin-left: 20px;
+  margin-right: 20px;
+  padding: 20px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+}
+
+.collector-account-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.collector-account-info {
+  font-size: 16px;
+  margin-bottom: 5px;
+}

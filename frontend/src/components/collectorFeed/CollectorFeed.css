@@ -1,0 +1,14 @@
+.account-link {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #423d3d;
+  color: #f6f6f6;
+  text-decoration: none;
+  border-radius: 4px;
+  border: 2px solid #ccc;
+  transition: background-color 0.3s ease;
+}
+
+.account-link:hover {
+  background-color: #e0e0e0;
+}

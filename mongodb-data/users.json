@@ -9,14 +9,13 @@
   "__v": 0
 },{
   "_id": {
-    "$oid": "6563a4d6cf310f44ab76741d"
+    "$oid": "9563a460cf310f44ab767414"
   },
-  "name": "Maiden Lane Foodbank",
-  "email": "maidenlane@email.com",
+  "name": "Waterloo Foodbank",
+  "email": "waterloo@email.com",
   "password": "password",
   "usertype":"Rescuer",
   "__v": 0
-
 },{
   "_id": {
     "$oid": "6463a460cf310f44ab767412"
@@ -29,7 +28,7 @@
   "description": "supermarket chain",
   "__v": 0
 },{
-  "_id": {
+"_id": {
     "$oid": "6463a4d6cf310f44ab76741d"
   },
   "name": "Costa",
@@ -37,6 +36,17 @@
   "password": "password",
   "usertype": "Hero",
   "location": "68 Goswell Rd., London EC1M 7AD",
+  "description": "cafe chain",
+  "__v": 0
+},{
+"_id": {
+    "$oid": "8463a4d6cf310f44ab767411"
+  },
+  "name": "Marks and Spencer",
+  "email": "m&s@email.com",
+  "password": "password",
+  "usertype": "Hero",
+  "location": "173 Oxford St, London W1D 2JR",
   "description": "cafe chain",
   "__v": 0
 }]
