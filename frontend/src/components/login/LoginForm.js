@@ -1,20 +1,12 @@
 import React, { useState } from "react";
-import { useNavigate as navigate } from "react-router-dom";
 import './LoginForm.css';
 
 const LoginForm = (props) => {
-  const [email, setEmail] = useState("hackney@email.com");//tesco@email.com
-  const [password, setPassword] = useState("password");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [failMessage, setFailMessage] = useState("");
   const [owner, setOwner] = useState(`Login ${props.owner}`);
-  const [ownerColor, setOwnerColor] = useState(
-    props.owner === "Food Hero"
-      ? "form-control btn btn-primary"
-      : "form-control btn btn-success"
-  );
-
   const HERO = "Hero";
-  const RESCUER = "Rescuer";
 
   const navigateToSignup = () => {
     if (props.owner === "Food Hero") {
@@ -49,9 +41,6 @@ const LoginForm = (props) => {
         } else {
           console.log("yay");
           window.localStorage.setItem("token", data.token);
-          window.localStorage.setItem("location", data.location);
-          window.localStorage.setItem("id", data.id);
-          window.localStorage.setItem("name", data.name);
           if (data.usertype === HERO) {
             props.navigate(`/foodhero/${data.id}`);
           } else {
@@ -73,15 +62,16 @@ const LoginForm = (props) => {
     setPassword(event.target.value);
   };
   return (
-    <div className="login-form">
+    <div className="login">
+      <img className="image" src={props.image} />
       <div className="container mt-5">
         <div className="text-center" style={{ color: "#dc3545" }}>
           {failMessage}
         </div>
         <div className="row mt-5">
           <div className="col"></div>
-          <div className="col">
-            <form onSubmit={handleSubmit}>
+          <div className="col"> 
+            <form onSubmit={handleSubmit} class="form-login">
               <div className="form-row">
                 <div className="form-group col-md-12 mt-1">
                   <label htmlFor="email">Email</label>
@@ -112,7 +102,7 @@ const LoginForm = (props) => {
                     role="submit-button"
                     id="submit"
                     type="submit"
-                    className={ownerColor}
+                    className="form-control btn btn-success"
                     value={owner}
                     onChange={handleOwnerChange}
                   />

@@ -21,9 +21,7 @@ const SessionsController = {
           token: token,
           message: "OK",
           id: user.id, 
-          usertype: user.usertype,
-          location: user.location,
-          username: user.name
+          usertype: user.usertype
         });
       }
     });
