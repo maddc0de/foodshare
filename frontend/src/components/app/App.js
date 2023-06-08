@@ -19,7 +19,7 @@ const App = () => {
       <Route path="/login/donator" element={<LoginDonator navigate={useNavigate()} />} />
       <Route path="/foodhero/:id" element={<DonatorFeed navigate={useNavigate()} />} />
       <Route path="/foodrescuer/:id" element={<CollectorFeed navigate={useNavigate()} />} />
-      <Route path="/foodhero/account/:id" element={<DonatorAccount navigate={useNavigate()} />} />
+      <Route path="/:id/account/" element={<DonatorAccount navigate={useNavigate()} />} />
       <Route path ="/:id/account" element={<CollectorAccount navigate={useNavigate()} />} />
     </Routes>
   );

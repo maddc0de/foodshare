@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import DonationForm from "../donationForm/DonationForm";
 import Navbar from "../navbar/Navbar";
 import "./DonatorFeed.css";
@@ -151,6 +151,9 @@ const DonatorFeed = ({ navigate }) => {
                 <div className="sticky-top">
                   <div id="feed" className="row">
                     <div className="col col-md-12 mb-3">
+                    <Link to={`/${id}/account`} className="btn btn-success col col-md-12" >
+                        My Account
+                        </Link>
                       <button
                         onClick={handleAddDonationClick}
                         className="btn btn-success  col col-md-12"

@@ -19,6 +19,7 @@ const CollectorFeed = ({ navigate }) => {
   const [donationInfo, setDonationInfo] = useState("");
   const [foodHeroName, setFoodHeroName] = useState("");
   const [needsRefresh, setRefresh] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleAddCollectionClick = (
     donationId,
@@ -29,7 +30,6 @@ const CollectorFeed = ({ navigate }) => {
     setDonationId(donationId);
     setDonationInfo(donationInfo);
     setFoodHeroName(foodHeroName);
-    // console.log('>>>>', event)
     setShowCollectionForm(true);
   };
 
@@ -71,9 +71,13 @@ const CollectorFeed = ({ navigate }) => {
 
 
   const donations = () => {
-    // return
-    return donationsList.map((donation, index) => {
-      return (
+    const filteredDonations = searchQuery
+      ? donationsList.filter((donation) =>
+          donation.description.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+      : donationsList;
+      
+    return filteredDonations.map((donation, index) => (
         <div
           key={index}
           className="container mb-2 border border-success border-1 rounded px-2 py-2"
@@ -106,8 +110,8 @@ const CollectorFeed = ({ navigate }) => {
             <div className="col text-end">Expires: {formatDate(donation.expiryDate)}</div>
           </div>
         </div>
-      );
-    });
+      )
+    )
   };
 
   if (token) {
@@ -147,7 +151,7 @@ const CollectorFeed = ({ navigate }) => {
                         {/* className="btn btn-success col col-md-12"
                         type="submit"
                       > */}
-                        <Link to={`/${id}/account`} className="account-link" >
+                        <Link to={`/${id}/account`} className="btn btn-success col col-md-12" >
                         My Account
                         </Link>
                       
@@ -158,16 +162,9 @@ const CollectorFeed = ({ navigate }) => {
                         type="search"
                         placeholder="Search"
                         aria-label="Search"
-                        value=""
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
                       />
-                    </div>
-                    <div className="col col-md-3">
-                      <button
-                        className="btn btn-outline-success col col-md-12"
-                        type="submit"
-                      >
-                        Search
-                      </button>
                     </div>
                   </div>
                 </div>
