@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import CollectionForm from "../collectionForm/CollectionForm";
 import Navbar from "../navbar/Navbar";
 import { Link } from "react-router-dom";
+import './CollectorFeed.css'
 
 const CollectorFeed = ({ navigate }) => {
   const { id } = useParams();
@@ -147,7 +148,7 @@ const CollectorFeed = ({ navigate }) => {
                         {/* className="btn btn-success col col-md-12"
                         type="submit"
                       > */}
-                        <Link to={`/${id}/account`} >
+                        <Link to={`/${id}/account`} className="account-link" >
                         My Account
                         </Link>
                       

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import CollectorFeed from "../collectorFeed/CollectorFeed";
+import Navbar from "../navbar/Navbar";
+import "./CollectorAccountPage.css"
 
 const CollectorAccount = ({ navigate }) => {
   const { id } = useParams();
@@ -29,25 +31,23 @@ const CollectorAccount = ({ navigate }) => {
       setPassword(dataAccount.password);
       setUserType(dataAccount.usertype);
 }, [])
-      
 
-
-
-  // const Account = () => {
-  //   return (
-  //     <h1>Account Page</h1>
-  //   );
-  // };
 
   if (token) {
     return (
-    <div>
-      <h1>Food Rescuer</h1>
-      <p>Name:{name} </p>
-      <p>Email:{email} </p>
-      <p>Password:{password} </p>
-    </div>
-  );
+      <>  
+        <Navbar></Navbar>
+      
+        <div className="collector-account-container">
+          <h1 className="collector-account-title">Food Rescuer: {name}'s Account</h1>
+          <p className="collector-account-name">Name: {name} </p>
+          <p className="collector-account-email">Email: {email} </p>
+          <p className="collector-account-password">Password: {password} </p>
+        </div>
+      </>
+      );
+  } else {
+    navigate('/login');
   }
 
   
