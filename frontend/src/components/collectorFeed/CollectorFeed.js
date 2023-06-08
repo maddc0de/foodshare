@@ -31,7 +31,7 @@ const CollectorFeed = ({ navigate }) => {
     setShowCollectionForm(true);
   };
 
-  const cancelAddCollectionClick = () => {
+  const handleGoBackToFeedClick = () => {
     setShowCollectionForm(false);
     setRefresh(!needsRefresh);
   };
@@ -131,8 +131,9 @@ const CollectorFeed = ({ navigate }) => {
                   <div className="col mt-2">
                     <input
                       className="btn btn-outline-secondary col-md-12"
-                      onClick={cancelAddCollectionClick}
-                      value="Cancel"
+                      id="back-button"
+                      onClick={handleGoBackToFeedClick}
+                      value="take me back to my feed"
                     />
                   </div>
                 </div>
