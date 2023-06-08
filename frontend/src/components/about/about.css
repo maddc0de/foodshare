@@ -2,9 +2,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 159vh;
+    height: 200vh;
     background-color: #f1f1f1;
-    margin-top: 900px;
+    margin-top: 1100px;
   }
   
   .calculator {

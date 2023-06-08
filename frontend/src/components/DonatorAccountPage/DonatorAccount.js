@@ -73,7 +73,7 @@ const DonatorAccount = ({ navigate }) => {
                 <div className="dashboard-stats">
                   <div className="dashboard-stat">
                     <h3 className="dashboard-subsection">Total number of donations:</h3>
-                    <h3 className="dashboard-text">4</h3>
+                    <p className="dashboard-text">4</p>
                     <p className="dashboard-description">
                       donations. You've reduced your food waste and provided for local communities who need it the most.
                     </p>
@@ -95,7 +95,7 @@ const DonatorAccount = ({ navigate }) => {
                   <div className="dashboard-stat">
                     <h3 className="dashboard-subsection">Your environmental impact:</h3>
                     <p className="dashboard-text">7.5kg of CO2e*</p>
-                    <p className="dashboard-text">(*based on data that 1 kg of food = 2.5kg of CO2e)</p>
+                    <p className="dashboard-description">(*based on data that 1 kg of food = 2.5kg of CO2e)</p>
                   </div>
                 </div>
       
