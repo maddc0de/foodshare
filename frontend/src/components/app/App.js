@@ -3,7 +3,7 @@ import LoginCollector from "../Collector/LoginCollector";
 import LoginDonator from "../Donator/LoginDonator";
 import SignUpForm from "../Collector/SignUpForm";
 import DonatorSignUpForm from '../Donator/SignUpForm';
-import DonatorFeed from '../donatorfeed/DonatorFeed';
+import DonatorFeed from '../donatorFeed/DonatorFeed';
 import CollectorFeed from '../collectorFeed/CollectorFeed';
 import About from '../about/About';
 import DonatorAccount from '../DonatorAccountPage/DonatorAccount';
