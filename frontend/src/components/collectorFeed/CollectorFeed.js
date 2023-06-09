@@ -4,6 +4,7 @@ import CollectionForm from "../collectionForm/CollectionForm";
 import Navbar from "../navbar/Navbar";
 import { Link } from "react-router-dom";
 import './CollectorFeed.css'
+import "./5.svg"
 
 const CollectorFeed = ({ navigate }) => {
   const { id } = useParams();
@@ -19,6 +20,7 @@ const CollectorFeed = ({ navigate }) => {
   const [donationInfo, setDonationInfo] = useState("");
   const [foodHeroName, setFoodHeroName] = useState("");
   const [needsRefresh, setRefresh] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleAddCollectionClick = (
     donationId,
@@ -29,7 +31,6 @@ const CollectorFeed = ({ navigate }) => {
     setDonationId(donationId);
     setDonationInfo(donationInfo);
     setFoodHeroName(foodHeroName);
-    // console.log('>>>>', event)
     setShowCollectionForm(true);
   };
 
@@ -71,12 +72,16 @@ const CollectorFeed = ({ navigate }) => {
 
 
   const donations = () => {
-    // return
-    return donationsList.map((donation, index) => {
-      return (
+    const filteredDonations = searchQuery
+      ? donationsList.filter((donation) =>
+          donation.description.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+      : donationsList;
+
+    return filteredDonations.map((donation, index) => (
         <div
           key={index}
-          className="container mb-2 border border-success border-1 rounded px-2 py-2"
+          className="container mb-2 border border-success border-1 rounded px-2 py-2 bg-white"
         >
           <div className="row">
             <div className="ol col-md-9">
@@ -106,20 +111,21 @@ const CollectorFeed = ({ navigate }) => {
             <div className="col text-end">Expires: {formatDate(donation.expiryDate)}</div>
           </div>
         </div>
-      );
-    });
+      )
+    )
   };
 
   if (token) {
     return (
       <>
         <Navbar owner={""} navigate={navigate}></Navbar>
+        
         <h2 className="ms-5">Hi, Rescuer!</h2>
-
-        <div className="container mt-5">
+        <img src={require("./5.svg").default} className="small-image" />
+        <div className="container mt-">
           <div className="row mt-5">
             <div className="col col-md-3"></div>
-            <div className="col col-md-6">
+            <div className="col col-md-11">
               {showCollectionForm ? (
                 <div className="row">
                   <CollectionForm
@@ -130,9 +136,9 @@ const CollectorFeed = ({ navigate }) => {
                     donationId={donationId}
                     foodHeroName={foodHeroName}
                   />
-                  <div className="col mt-2">
+                  <div className="col mt-10">
                     <input
-                      className="btn btn-outline-secondary col-md-12"
+                      className="btn btn-secondary col-md-12"
                       id="back-button"
                       onClick={handleGoBackToFeedClick}
                       value="take me back to my feed"
@@ -144,10 +150,7 @@ const CollectorFeed = ({ navigate }) => {
                   <div id="feed" className="row">
                     <div className="col col-md-3">
                       
-                        {/* className="btn btn-success col col-md-12"
-                        type="submit"
-                      > */}
-                        <Link to={`/${id}/account`} className="account-link" >
+                        <Link to={`/${id}/account`} className="btn btn-warning col col-md-12" >
                         My Account
                         </Link>
                       
@@ -158,16 +161,9 @@ const CollectorFeed = ({ navigate }) => {
                         type="search"
                         placeholder="Search"
                         aria-label="Search"
-                        value=""
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
                       />
-                    </div>
-                    <div className="col col-md-3">
-                      <button
-                        className="btn btn-outline-success col col-md-12"
-                        type="submit"
-                      >
-                        Search
-                      </button>
                     </div>
                   </div>
                 </div>
@@ -181,7 +177,7 @@ const CollectorFeed = ({ navigate }) => {
                 return;
               } else {
                 return (
-                  <div id="donations-list" className="col col-md-6 mx-auto">
+                  <div id="donations-list" className="col col-md-11 mx-auto">
                     <h3>Donations</h3>
                     {donations()}
                   </div>

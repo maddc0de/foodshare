@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import DonationForm from "../donationForm/DonationForm";
 import Navbar from "../navbar/Navbar";
 import "./DonatorFeed.css";
+import "./4.svg";
 
 const DonatorFeed = ({ navigate }) => {
   const { id } = useParams();
@@ -97,11 +98,11 @@ const DonatorFeed = ({ navigate }) => {
     return filteredDonations.map((donation) => (
       <div
         key={donation.code}
-        className="container mb-2 border border-success border-1 rounded px-2 py-2"
+        className="container mb-2 border border-success border-1 rounded px-2 py-2 bg-white"
       >
         <div className="row">
           <div className="dropdown col">
-            {statusDropdown('btn-outline-success border-0 px-0', donation.status, false)}
+            {statusDropdown('btn-success border-0 px-0', donation.status, false)}
           </div>
           <div className="col col-md-9 text-end">
             <button disabled className="btn btn-outline-success border-0">
@@ -123,11 +124,10 @@ const DonatorFeed = ({ navigate }) => {
 
   if (token) {
     return (
-      <>
+      <div className="feed-box">
         <Navbar owner={""} navigate={navigate}></Navbar>
-        <h2 className="ms-5">Hello, Hero!</h2>
-
         <div className="container mt-5">
+        <img src={require("./4.svg").default} className="small-image" />
           <div className="row mt-5">
             <div className="col col-md-3"></div>
             <div className="col col-md-6">
@@ -141,7 +141,7 @@ const DonatorFeed = ({ navigate }) => {
                   />
                   <div className="col mt-2">
                     <input
-                      className="btn btn-outline-secondary col-md-12"
+                      className="btn btn-secondary col-md-12"
                       onClick={cancelAddDonationClick}
                       value="Cancel"
                     />
@@ -151,17 +151,21 @@ const DonatorFeed = ({ navigate }) => {
                 <div className="sticky-top">
                   <div id="feed" className="row">
                     <div className="col col-md-12 mb-3">
+                    <Link to={`/${id}/account`} className="btn btn-warning col col-md-12" >
+                        My Account
+                        </Link>
                       <button
+                        type="button"
                         onClick={handleAddDonationClick}
-                        className="btn btn-success  col col-md-12"
+                        className="btn btn-success btn-sm"
                       >
                         Add Your Donation
                       </button>
                     </div>
                   </div>
                   <div id="feed" className="row">
-                    <div className="dropdown col col-md-3 mb-1">
-                    {statusDropdown('btn-outline-success', 'Filter', false)}
+                    <div className="dropdown col col-md-6 mb-1">
+                    {statusDropdown('btn-success', 'Filter', false)}
                     </div>
                     <div className="col col-md-6">
                       <input
@@ -197,7 +201,7 @@ const DonatorFeed = ({ navigate }) => {
             <div className="col"></div>
           </div>
         </div>
-      </>
+      </div>
     );
   } else {
     navigate("/signup/donator");

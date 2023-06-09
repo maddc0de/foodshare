@@ -6,13 +6,7 @@ const LoginForm = (props) => {
   const [password, setPassword] = useState("");
   const [failMessage, setFailMessage] = useState("");
   const [owner, setOwner] = useState(`Login ${props.owner}`);
-  const [ownerColor, setOwnerColor] = useState(
-    props.owner === "Food Hero"
-      ? "form-control btn btn-primary"
-      : "form-control btn btn-success"
-  );
   const HERO = "Hero";
-  const RESCUER = "Rescuer";
 
   const navigateToSignup = () => {
     if (props.owner === "Food Hero") {
@@ -69,7 +63,7 @@ const LoginForm = (props) => {
   };
   return (
     <div className="login-form">
-      <img className="default" src={props.image} />
+      <img className="image" src={props.image} />
       <div className="container mt-5">
         <div className="text-center" style={{ color: "#dc3545" }}>
           {failMessage}
@@ -77,7 +71,7 @@ const LoginForm = (props) => {
         <div className="row mt-5">
           <div className="col"></div>
           <div className="col"> 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} class="form-login">
               <div className="form-row">
                 <div className="form-group col-md-12 mt-1">
                   <label htmlFor="email">Email</label>
@@ -108,7 +102,7 @@ const LoginForm = (props) => {
                     role="submit-button"
                     id="submit"
                     type="submit"
-                    className={ownerColor}
+                    className="form-control btn btn-success"
                     value={owner}
                     onChange={handleOwnerChange}
                   />
