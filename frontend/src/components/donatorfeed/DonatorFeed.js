@@ -151,7 +151,7 @@ const DonatorFeed = ({ navigate }) => {
                 <div className="sticky-top">
                   <div id="feed" className="row">
                     <div className="col col-md-12 mb-3">
-                    <Link to={`/${id}/account`} className="btn btn-warning col col-md-12" >
+                    <Link to={`/${id}/foodhero`} className="btn btn-warning col col-md-12" >
                         My Account
                         </Link>
                       <button

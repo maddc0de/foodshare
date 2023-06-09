@@ -120,8 +120,7 @@ const CollectorFeed = ({ navigate }) => {
       <>
         <Navbar owner={""} navigate={navigate}></Navbar>
         
-        <h2 className="ms-5">Hi, Rescuer!</h2>
-        <img src={require("./5.svg").default} className="small-image" />
+        <h2 className="ms-5"></h2>
         <div className="container mt-">
           <div className="row mt-5">
             <div className="col col-md-3"></div>
@@ -147,10 +146,11 @@ const CollectorFeed = ({ navigate }) => {
                 </div>
               ) : (
                 <div className="sticky-top">
+                            <img src={require("./5.svg").default} className="small-image" />
                   <div id="feed" className="row">
                     <div className="col col-md-3">
                       
-                        <Link to={`/${id}/account`} className="btn btn-warning col col-md-12" >
+                        <Link to={`/${id}/foodrescuer`} className="btn btn-warning col col-md-12" >
                         My Account
                         </Link>
                       
