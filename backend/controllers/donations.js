@@ -31,6 +31,7 @@ const DonationsController = {
     try {
       const donations = await Donation.find({ status: "available" });
       const token = await TokenGenerator.jsonwebtoken(req.user_id);
+      donations.sort((a, b) => a.expiryDate - b.expiryDate); // sort donations to closest expiry date first
       res.status(200).json({ donations });
     } catch (err) {
       res.status(500).json({ error: "Internal Server Error" });
