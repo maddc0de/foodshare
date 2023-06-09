@@ -141,7 +141,7 @@ const CollectorFeed = ({ navigate }) => {
                       className="btn btn-secondary col-md-12"
                       id="back-button"
                       onClick={handleGoBackToFeedClick}
-                      value="take me back to my feed"
+                      value="Take me back to my feed"
                     />
                   </div>
                 </div>
