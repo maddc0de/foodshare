@@ -26,7 +26,7 @@ The food bank will be able to see a map/list view of local food heroes and the a
 ## How to use
 This project was created using the MERN stack, with the aim that it would become a website. Therefore, the user is not required to install any applications. However, this project was not intended to go live, so if you would like to view the code you would need to install the applications associated with the MERN stack
 
-![](./diagrams/how_to_use.gif)
+![](./diagrams/how_to_use.mov)
 When the user first enters the foodshare site they see the signup donator page.
 
 There are two sign up pages; food Hero for users who are donating food and food rescuer for those who are receiving food. Users are able to toggle between the two options using a toggle button in the upper right hand corner. 
