@@ -189,7 +189,7 @@ const DonatorFeed = ({ navigate }) => {
                 return;
               } else {
                 return (
-                  <div id="donations-list" className="col col-md-6 mx-auto">
+                  <div id="donations-list" className="col col-md-11 mx-auto">
                     <h3>My Donations</h3>
                     {myDonations()}
                   </div>
