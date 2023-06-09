@@ -4,6 +4,7 @@ import CollectionForm from "../collectionForm/CollectionForm";
 import Navbar from "../navbar/Navbar";
 import { Link } from "react-router-dom";
 import './CollectorFeed.css'
+import "./5.svg"
 
 const CollectorFeed = ({ navigate }) => {
   const { id } = useParams();
@@ -118,12 +119,13 @@ const CollectorFeed = ({ navigate }) => {
     return (
       <>
         <Navbar owner={""} navigate={navigate}></Navbar>
+        
         <h2 className="ms-5">Hi, Rescuer!</h2>
-
-        <div className="container mt-5">
+        <img src={require("./5.svg").default} className="small-image" />
+        <div className="container mt-">
           <div className="row mt-5">
             <div className="col col-md-3"></div>
-            <div className="col col-md-6">
+            <div className="col col-md-11">
               {showCollectionForm ? (
                 <div className="row">
                   <CollectionForm
@@ -134,7 +136,7 @@ const CollectorFeed = ({ navigate }) => {
                     donationId={donationId}
                     foodHeroName={foodHeroName}
                   />
-                  <div className="col mt-2">
+                  <div className="col mt-10">
                     <input
                       className="btn btn-secondary col-md-12"
                       id="back-button"
@@ -175,7 +177,7 @@ const CollectorFeed = ({ navigate }) => {
                 return;
               } else {
                 return (
-                  <div id="donations-list" className="col col-md-6 mx-auto">
+                  <div id="donations-list" className="col col-md-11 mx-auto">
                     <h3>Donations</h3>
                     {donations()}
                   </div>

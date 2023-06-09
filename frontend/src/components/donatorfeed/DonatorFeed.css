@@ -56,3 +56,9 @@ button:hover {
 .feed-box {
   margin-top: 150px;
 }
+
+.small-image {
+  max-width: 500px;
+  height: auto;
+  display: inline-block;
+}

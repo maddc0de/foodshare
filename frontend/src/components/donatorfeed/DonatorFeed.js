@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import DonationForm from "../donationForm/DonationForm";
 import Navbar from "../navbar/Navbar";
 import "./DonatorFeed.css";
+import "./4.svg";
 
 const DonatorFeed = ({ navigate }) => {
   const { id } = useParams();
@@ -126,6 +127,7 @@ const DonatorFeed = ({ navigate }) => {
       <div className="feed-box">
         <Navbar owner={""} navigate={navigate}></Navbar>
         <div className="container mt-5">
+        <img src={require("./4.svg").default} className="small-image" />
           <div className="row mt-5">
             <div className="col col-md-3"></div>
             <div className="col col-md-6">

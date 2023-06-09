@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import DonationForm from "../donationForm/DonationForm";
 import Navbar from "../navbar/Navbar";
 import "./DonatorAccount.css"
+import "./3.svg"
 
 
 
@@ -68,7 +69,6 @@ const DonatorAccount = ({ navigate }) => {
               <Navbar owner={""} navigate={navigate}></Navbar>
               <div className="dashboard">
                 <h1 className="dashboard-title">Your Dashboard:</h1>
-      
                 <div className="dashboard-stats">
                   <div className="dashboard-stat">
                     <h3 className="dashboard-subsection">Total number of donations:</h3>

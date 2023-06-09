@@ -62,3 +62,8 @@
     margin-top: 40px;
   }
   
+  .small-image {
+    max-width: 500px;
+    height: auto;
+    display: inline-block;
+  }
