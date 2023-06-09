@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "../navbar/Navbar";
+import './rescuer.svg';
+import './collectionform.css';
 
 const SignUpForm = ({ navigate }) => {
   const [name, setName] = useState("");
@@ -57,6 +59,9 @@ const SignUpForm = ({ navigate }) => {
       <Navbar owner={owner}></Navbar>
       
       <div className="container mt-5" id="signup-box">
+      <img src={require("./rescuer.svg").default} className="small-image" />
+      <h3 class="fw-semibold">Still need convincing? <a href="/about">Find out how here.</a></h3>
+      <h3 class="fw-semibold">_____________________________________________________ </h3>
         <div className="row mt-5">
           <div className="col"></div>
           <div className="col">

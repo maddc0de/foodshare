@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "../navbar/Navbar";
+import './donatorform.css';
 
 const DonatorSignUpForm = ({ navigate }) => {
   const [name, setName] = useState("");
@@ -68,8 +69,12 @@ const navigateToLogin = () => {
   return (
     <>
       <Navbar owner={owner}></Navbar>
-
       <div className="container mt-5" id="signup-box">
+      
+      <h3 className="fw-bold circle-border">We need Heroes.</h3>
+      <img src={require("./title(2).svg").default} className="small-image" />
+      <h3 class="fw-semibold">Still need convincing? <a href="/about">Find out how here.</a></h3>
+      <h3 class="fw-semibold">_____________________________________________________ </h3>
         <div className="row mt-5">
           <div className="col"></div>
           <div className="col">
