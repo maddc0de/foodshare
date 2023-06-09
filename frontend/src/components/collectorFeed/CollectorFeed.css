@@ -12,3 +12,10 @@
 .account-link:hover {
   background-color: #e0e0e0;
 }
+
+.small-image {
+  max-width:500px;
+  height: auto;
+  display: inline-block;
+  margin-top: 300px; /* Adjust this value to increase or decrease the margin */
+}
